@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const { readdirSync } = require("fs");
 require("dotenv").config();
 
 // app
@@ -25,15 +26,11 @@ app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "2mb" }));
 app.use(cors());
 
-// route
-app.get("/api", (req, res) => {
-    res.json({
-        data: "hey you hit node API",
-    });
-});
+// routes
+readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
 
 
-// route
+// home route
 app.get("/", (req, res) => {
     res.json({
         data: "Node API Running",

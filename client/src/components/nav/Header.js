@@ -4,8 +4,11 @@ import {
     AppstoreOutlined,
     SettingOutlined,
     UserOutlined,
-    UserAddOutlined,
+    UserAddOutlined, LogoutOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+
+
 
 const { SubMenu, Item } = Menu;
 
@@ -17,18 +20,37 @@ const Header = () => {
         setCurrent(e.key);
     };
 
+
+     const menuItems = [
+            {
+                key: 'center',
+                icon: <UserOutlined />,
+                label: '个人中心',
+            },
+        {
+            key: 'settings',
+                icon: <SettingOutlined />,
+                label: '个人设置',
+            },
+        {
+            key: 'logout',
+                icon: <LogoutOutlined />,
+                label: '退出登录',
+            },
+    ];
+
     return (
         <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
             <Item key="home" icon={<AppstoreOutlined />}>
-                Home
+                <Link to="/">Home</Link>
             </Item>
 
-            <Item key="register" icon={<UserAddOutlined />} className="float-right">
-                Register
+            <Item key="register" icon={<UserAddOutlined />} style={{marginLeft: 'auto'}} className="float-right">
+                <Link to="/register">Register</Link>
             </Item>
 
             <Item key="login" icon={<UserOutlined />} className="float-right">
-                Login
+                <Link to="/login">Login</Link>
             </Item>
 
             <SubMenu icon={<SettingOutlined />} title="Username">
@@ -36,6 +58,7 @@ const Header = () => {
                 <Item key="setting:2">Option 2</Item>
             </SubMenu>
         </Menu>
+        // <Menu items={menuItems}/>
     );
 };
 
