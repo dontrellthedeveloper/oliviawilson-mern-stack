@@ -75,6 +75,9 @@ const Shop = () => {
     useEffect(() => {
         const delayed = setTimeout(() => {
             fetchProducts({ query: text });
+            if (!text) {
+                loadAllProducts();
+            }
         }, 300);
         return () => clearTimeout(delayed);
     }, [text]);
@@ -328,7 +331,7 @@ const Shop = () => {
                             <div>
                                 <Slider
                                     className="ml-4 mr-4"
-                                    tipFormatter={(v) => `$${v}`}
+                                    tootipFormatter={(v) => `$${v}`}
                                     range
                                     value={price}
                                     onChange={handleSlider}
