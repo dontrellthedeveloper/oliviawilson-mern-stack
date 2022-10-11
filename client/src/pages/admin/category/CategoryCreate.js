@@ -9,6 +9,10 @@ import {
 } from "../../../functions/category";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import CategoryForm from "../../../components/forms/CategoryForm";
+import LocalSearch from "../../../components/forms/LocalSearch";
+
+
 
 const CategoryCreate = () => {
 
@@ -17,6 +21,10 @@ const CategoryCreate = () => {
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
+
+
+    // step 1
+    const [keyword, setKeyword] = useState("");
 
 
 
@@ -67,23 +75,16 @@ const CategoryCreate = () => {
         }
     };
 
-    const categoryForm = () => (
-        <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label>Name</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    autoFocus
-                    required
-                />
-                <br />
-                <button className="btn btn-outline-primary">Save</button>
-            </div>
-        </form>
-    );
+    // step 3
+    const handleSearchChange = (e) => {
+        e.preventDefault();
+        setKeyword(e.target.value.toLowerCase());
+    };
+
+    // step 4
+    const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
+
+
 
     return (
         <div className="container-fluid">
@@ -97,9 +98,22 @@ const CategoryCreate = () => {
                     ) : (
                         <h4>Create category</h4>
                     )}
-                    {categoryForm()}
+                    <CategoryForm
+                        handleSubmit={handleSubmit}
+                        name={name}
+                        setName={setName}
+                    />
+
+
+                    {/* step 2 and step 3 */}
+                    <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+
+
+
+
                     <hr />
-                    {categories.map((c) => (
+                    {/* step 5 */}
+                    {categories.filter(searched(keyword)).map((c) => (
                         <div className="alert alert-secondary" key={c._id}>
                             {c.name}
                             <span
@@ -107,7 +121,7 @@ const CategoryCreate = () => {
                                 className="btn btn-sm float-right"
                             >
                                 <DeleteOutlined className="text-danger" />
-                              </span>
+                            </span>
                             <Link to={`/admin/category/${c.slug}`}>
                                 <span className="btn btn-sm float-right">
                                   <EditOutlined className="text-warning" />
