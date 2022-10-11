@@ -26,7 +26,6 @@ exports.listAll = async (req, res) => {
     res.json(products);
 };
 
-
 exports.remove = async (req, res) => {
     try {
         const deleted = await Product.findOneAndRemove({
@@ -35,10 +34,9 @@ exports.remove = async (req, res) => {
         res.json(deleted);
     } catch (err) {
         console.log(err);
-        return res.status(400).send("Product delete failed");
+        return res.staus(400).send("Product delete failed");
     }
 };
-
 
 exports.read = async (req, res) => {
     const product = await Product.findOne({ slug: req.params.slug })
@@ -47,7 +45,6 @@ exports.read = async (req, res) => {
         .exec();
     res.json(product);
 };
-
 
 exports.update = async (req, res) => {
     try {
@@ -69,20 +66,48 @@ exports.update = async (req, res) => {
     }
 };
 
+// WITHOUT PAGINATION
+// exports.list = async (req, res) => {
+//   try {
+//     // createdAt/updatedAt, desc/asc, 3
+//     const { sort, order, limit } = req.body;
+//     const products = await Product.find({})
+//       .populate("category")
+//       .populate("subs")
+//       .sort([[sort, order]])
+//       .limit(limit)
+//       .exec();
 
+//     res.json(products);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+// WITH PAGINATION
 exports.list = async (req, res) => {
+    // console.table(req.body);
     try {
         // createdAt/updatedAt, desc/asc, 3
-        const { sort, order, limit } = req.body;
+        const { sort, order, page } = req.body;
+        const currentPage = page || 1;
+        const perPage = 3; // 3
+
         const products = await Product.find({})
+            .skip((currentPage - 1) * perPage)
             .populate("category")
             .populate("subs")
             .sort([[sort, order]])
-            .limit(limit)
+            .limit(perPage)
             .exec();
 
         res.json(products);
     } catch (err) {
         console.log(err);
     }
+};
+
+exports.productsCount = async (req, res) => {
+    let total = await Product.find({}).estimatedDocumentCount().exec();
+    res.json(total);
 };
