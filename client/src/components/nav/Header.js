@@ -9,8 +9,8 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import firebase from "firebase";
-import {useDispatch} from "react-redux";
-import {useHistory} from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 
 
@@ -20,6 +20,7 @@ const Header = () => {
     const [current, setCurrent] = useState("home");
 
     let dispatch = useDispatch();
+    let { user } = useSelector((state) => ({ ...state }));
     let history = useHistory();
 
     const handleClick = (e) => {
@@ -39,20 +40,41 @@ const Header = () => {
 
      const menuItems = [
             {
-                key: 'center',
-                icon: <UserOutlined />,
-                label: '个人中心',
+                key: 'home',
+                icon: <AppstoreOutlined />,
+                label: (
+                    <div>
+                        <Link to="/">Home</Link>
+                    </div>
+                ),
             },
-        {
-            key: 'settings',
-                icon: <SettingOutlined />,
-                label: '个人设置',
+            {
+                key: 'register',
+                icon: <UserAddOutlined />,
+                label: (
+                    <div>
+                        <Link to="/register">Register</Link>
+                    </div>
+                ),
             },
-        {
-            key: 'logout',
-                icon: <LogoutOutlined />,
-                label: '退出登录',
-            },
+             {
+                 key: 'login',
+                 icon: <UserOutlined />,
+                 label: (
+                     <div>
+                         <Link to="/login">Login</Link>
+                     </div>
+                 ),
+             },
+             {
+                 key: 'logout',
+                 icon: <LogoutOutlined />,
+                 label: (
+                     <div onClick={logout}>
+                         Logout
+                     </div>
+                 ),
+             },
     ];
 
     return (
@@ -61,23 +83,35 @@ const Header = () => {
                 <Link to="/">Home</Link>
             </Item>
 
-            <Item key="register" icon={<UserAddOutlined />} style={{marginLeft: 'auto'}} className="float-right">
-                <Link to="/register">Register</Link>
-            </Item>
-
-            <Item key="login" icon={<UserOutlined />} className="float-right">
-                <Link to="/login">Login</Link>
-            </Item>
-
-            <SubMenu icon={<SettingOutlined />} title="Username">
-                <Item key="setting:1">Option 1</Item>
-                <Item key="setting:2">Option 2</Item>
-                <Item icon={<LogoutOutlined/>} onClick={logout}>
-                    Logout
+            {!user && (
+                <Item key="register" icon={<UserAddOutlined />} className="float-right">
+                    <Link to="/register">Register</Link>
                 </Item>
-            </SubMenu>
+            )}
+
+            {!user && (
+                <Item key="login" icon={<UserOutlined />} className="float-right">
+                    <Link to="/login">Login</Link>
+                </Item>
+            )}
+
+
+            {user && (
+                <SubMenu
+                    key='sub'
+                    icon={<SettingOutlined />}
+                    title={user.email && user.email.split("@")[0]}
+                    className="float-right"
+                >
+                    <Item key="setting:1">Option 1</Item>
+                    <Item key="setting:2">Option 2</Item>
+                    <Item icon={<LogoutOutlined />} onClick={logout}>
+                        Logout
+                    </Item>
+                </SubMenu>
+            )}
         </Menu>
-        // <Menu items={menuItems}/>
+        // <Menu items={menuItems} onClick={handleClick} selectedKeys={[current]} mode="horizontal"/>
     );
 };
 
