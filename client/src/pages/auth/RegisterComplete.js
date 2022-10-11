@@ -8,7 +8,7 @@ const RegisterComplete = ({ history }) => {
 
     useEffect(() => {
         setEmail(window.localStorage.getItem("emailForRegistration"));
-    }, []);
+    }, [history]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
