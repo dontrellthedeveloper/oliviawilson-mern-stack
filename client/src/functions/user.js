@@ -51,3 +51,4 @@ export const applyCoupon = async (authtoken, coupon) =>
             },
         }
     );
+
