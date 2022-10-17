@@ -11,6 +11,7 @@ import {
 import FooterEcommerce from "components/Footers/FooterEcommerce.js";
 import WhiteNavbar2 from "../../components/nav/WhiteNavbar";
 import AdminNav from "../../components/nav/AdminNav";
+import FooterBlack from "../../components/Footers/FooterBlack";
 
 const AdminDashboard = () => {
     const [orders, setOrders] = useState([]);
@@ -42,9 +43,13 @@ const AdminDashboard = () => {
             <div className="wrapper">
 
                 {/* section */}
-                <div className="section section-gray">
+                <div className="section section-gray" style={{minHeight: '100vh'}}>
                     <Container>
-                        <h3 className="section-title">Admin Dashboard</h3>
+                        <h3
+                            style={{textAlign: 'center',  textTransform: 'capitalize', marginTop: '40px'}}
+                            className="section-title">
+                            Admin Dashboard
+                        </h3>
                         <Row>
                             <Col md="3">
 
@@ -55,7 +60,7 @@ const AdminDashboard = () => {
 
 
                             <Col md="9">
-                                <h4 className="title" style={{marginBottom: '8px'}}>
+                                <h4 className="title" style={{marginBottom: '15px', textAlign: 'center', marginTop: '30px'}}>
                                     <small>Orders</small>
                                 </h4>
 
@@ -68,7 +73,7 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* section */}
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );

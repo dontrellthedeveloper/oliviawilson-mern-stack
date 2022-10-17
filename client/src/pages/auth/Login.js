@@ -234,8 +234,11 @@ const Login = ({ history }) => {
                         </Row>
                     </Container>
                     <div className="demo-footer text-center">
-                        <h6>
-                            © {new Date().getFullYear()}, made with{" "}
+
+                        <h6 style={{color: '#fff'}}>
+                            © {new Date().getFullYear()}
+                            {" "}
+                            | Olivia Wilson Boutique, LLC <i className="fa fa-heart heart" />
                         </h6>
                     </div>
                 </div>

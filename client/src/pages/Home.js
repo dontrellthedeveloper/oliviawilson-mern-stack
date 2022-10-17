@@ -11,6 +11,7 @@ import NewArrivals from "../components/home/NewArrivals";
 import BestSellers from "../components/home/BestSellers";
 import CategoryList from "../components/category/CategoryList";
 import SubList from "../components/sub/SubList";
+import FooterBlack from "../components/Footers/FooterBlack";
 
 
 
@@ -77,7 +78,7 @@ const Home = () => {
 
                     </Container>
                 </div>
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );

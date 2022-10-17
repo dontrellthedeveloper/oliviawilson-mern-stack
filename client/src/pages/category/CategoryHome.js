@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import FooterEcommerce from "components/Footers/FooterEcommerce.js";
 import WhiteNavbar2 from "../../components/nav/WhiteNavbar";
+import FooterBlack from "../../components/Footers/FooterBlack";
 
 const CategoryHome = ({match}) => {
     const [category, setCategory] = useState({});
@@ -35,7 +36,7 @@ const CategoryHome = ({match}) => {
             <div className="wrapper">
 
                 {/* section */}
-                <div className="section section-gray">
+                <div className="section section-gray" style={{minHeight: '100vh'}}>
                     <Container>
                         <h3
                             style={{textAlign: 'center', marginTop: '40px', textTransform: 'capitalize'}}
@@ -81,7 +82,7 @@ const CategoryHome = ({match}) => {
                 {/* section */}
 
                 {/* section */}
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );

@@ -12,6 +12,7 @@ import {
 import FooterEcommerce from "components/Footers/FooterEcommerce.js";
 import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
 import AdminNav from "../../../components/nav/AdminNav";
+import FooterBlack from "../../../components/Footers/FooterBlack";
 
 
 
@@ -67,9 +68,13 @@ const AllProducts = () => {
             <div className="wrapper">
 
                 {/* section */}
-                <div className="section section-gray">
+                <div className="section section-gray" style={{minHeight: '100vh'}}>
                     <Container>
-                        <h3 className="section-title">All Products</h3>
+                        <h3
+                            style={{textAlign: 'center',  textTransform: 'capitalize', marginTop: '40px'}}
+                            className="section-title">
+                            All Products
+                        </h3>
                         <Row>
                             <Col md="3">
                                 <AdminNav/>
@@ -77,7 +82,7 @@ const AllProducts = () => {
 
 
 
-                            <Col md="9" style={{marginTop: '70px'}}>
+                            <Col md="9" style={{marginTop: '30px'}}>
                                 <div className="products">
                                     <Row>
 
@@ -101,7 +106,7 @@ const AllProducts = () => {
                 </div>
 
                 {/* section */}
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );

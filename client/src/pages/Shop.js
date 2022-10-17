@@ -23,6 +23,7 @@ import {
 import FooterEcommerce from "components/Footers/FooterEcommerce.js";
 import WhiteNavbar2 from "../components/nav/WhiteNavbar";
 import ProductCard from "../components/cards/ProductCard";
+import FooterBlack from "../components/Footers/FooterBlack";
 
 const Shop = () => {
     // states for collapses
@@ -366,7 +367,7 @@ const Shop = () => {
             <div className="wrapper">
 
                 {/* section */}
-                <div className="section section-gray">
+                <div className="section section-gray" style={{minHeight: '100vh'}}>
                     <Container>
 
                         <h3
@@ -592,7 +593,7 @@ const Shop = () => {
                 {/* section */}
 
                 {/* section */}
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );

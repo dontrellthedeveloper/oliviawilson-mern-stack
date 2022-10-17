@@ -1,9 +1,14 @@
 /*eslint-disable*/
 import React from "react";
-import { Container, Row } from "reactstrap";
+import {Container, DropdownItem, Row} from "reactstrap";
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 
 const FooterBlack = () => {
+
+  let { user, cart } = useSelector((state) => ({ ...state }));
+
   return (
     <>
       <footer className="footer footer-black footer-white">
@@ -11,38 +16,61 @@ const FooterBlack = () => {
           <Row>
             <nav className="footer-nav">
               <ul>
-                <li>
-                  <a
-                    href="https://www.creative-tim.com?ref=pkpr-black-footer"
-                    target="_blank"
-                    className="mr-1"
-                  >
-                    Creative Tim
-                  </a>
+                <li style={{marginBottom: '0', marginTop:'0'}}>
+                  <Link to='/'>
+                    <img src={require("assets/img/ecommerce/olivia-wilson-logo-light.png")} width='100px' alt=""/>
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="http://blog.creative-tim.com/?ref=pkpr-black-footer"
-                    target="_blank"
-                    className="mr-1"
-                  >
-                    Blog
-                  </a>
+                  <Link to='/shop'>
+                    Shop
+                  </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://www.creative-tim.com/license?ref=pkpr-black-footer"
-                    target="_blank"
-                  >
-                    Licenses
-                  </a>
+                  <Link to='/cart'>
+                    Cart
+                  </Link>
                 </li>
+                {!user && (
+                <li>
+                  <Link to='/login'>
+                    Login
+                  </Link>
+                </li>
+                )}
+
+                {!user && (
+                    <li>
+                      <Link to='/register'>
+                        Sign Up
+                      </Link>
+                    </li>
+                )}
+
+                {user && user.role === "subscriber" && (
+                    <li>
+                      <Link to='/user/history'>
+                        {user.email && user.email.split("@")[0]}
+                      </Link>
+                    </li>
+                )}
+
+
+                {user && user.role === "admin" && (
+                    <li>
+                      <Link to='/user/wishlist'>
+                        {user.email && user.email.split("@")[0]}
+                      </Link>
+                    </li>
+                )}
+
               </ul>
             </nav>
             <div className="credits ml-auto">
               <span className="copyright">
                 © {new Date().getFullYear()}
-                , made with <i className="fa fa-heart heart" /> by Creative Tim
+                {" "}
+                 | Olivia Wilson Boutique, LLC <i className="fa fa-heart heart" />
               </span>
             </div>
           </Row>

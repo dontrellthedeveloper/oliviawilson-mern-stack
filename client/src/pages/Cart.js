@@ -52,16 +52,16 @@ const Cart = ({ history }) => {
     const showCartItems = () => (
 
 
-        <Table className="table-shopping" responsive>
+        <Table className="table-shopping" responsive style={{backgroundColor: '#fff'}}>
             <thead>
                 <tr>
                     <th scope="col" className="text-center">Image</th>
                     <th scope="col" className="text-center">Title</th>
                     <th scope="col" className="text-center">Price</th>
                     <th scope="col" className="text-center">Brand</th>
-                    <th scope="col" className="text-center">Color</th>
-                    <th scope="col" className="text-center">Count</th>
                     <th scope="col">Shipping</th>
+                    <th scope="col" className="text-center">Count</th>
+                    <th scope="col" className="text-center">Color</th>
                     <th scope="col">Remove</th>
                 </tr>
             </thead>
@@ -78,8 +78,8 @@ const Cart = ({ history }) => {
                     <td />
                     <td />
                     <td />
-                    <td className="td-total">Total</td>
-                    <td className="td-total">
+                    <td className="td-total text-right">Total:</td>
+                    <td className="td-total text-left">
                         <small>$</small>
                         {getTotal()}
                     </td>
@@ -100,22 +100,19 @@ const Cart = ({ history }) => {
         <>
             <WhiteNavbar2 />
             <div className="main">
-                <div className="section section-gray" style={{marginTop: '40px'}}>
+                <div className="section section-gray" style={{minHeight: '100vh', marginTop: '0'}} >
                     <Container>
 
                         <h3
-                            style={{textAlign: 'center', marginTop: '60px', textTransform: 'capitalize'}}
+                            style={{textAlign: 'center', marginTop: '60px',marginBottom: '40px', textTransform: 'capitalize'}}
                             className="section-title">
                             Shopping Cart
                         </h3>
 
                         <Row>
-                            <Col md="12">
-                                <h4 className="title">{cart.length} Product</h4>
-                            </Col>
 
 
-                            <Col className="ml-auto mr-auto" md="9">
+                            <Col className="ml-auto mr-auto" md="9" >
 
                                 {!cart.length ? (
                                     <p>
@@ -131,10 +128,10 @@ const Cart = ({ history }) => {
 
                             </Col>
 
-                            <Col  md="3">
+                            <Col  md="3" style={{textAlign: 'center'}}>
                                 <h4>Order Summary</h4>
                                 <hr />
-                                <p>Products</p>
+                                <h5 className="title">{cart.length} Products</h5>
                                 {cart.map((c, i) => (
                                     <div key={i}>
                                         <p>

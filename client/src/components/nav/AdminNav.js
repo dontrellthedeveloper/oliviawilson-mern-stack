@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const AdminNav = () => {
     return (
-        <Card className="card-refine" style={{marginTop: '70px'}}>
+        <Card className="card-refine" style={{marginTop: '30px'}}>
             <div
                 aria-expanded={true}
                 aria-multiselectable={true}

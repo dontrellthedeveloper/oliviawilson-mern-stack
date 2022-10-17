@@ -12,6 +12,7 @@ import {
 import FooterEcommerce from "components/Footers/FooterEcommerce.js";
 import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
 import AdminNav from "../../../components/nav/AdminNav";
+import FooterBlack from "../../../components/Footers/FooterBlack";
 
 
 
@@ -94,16 +95,33 @@ const ProductCreate = () => {
             <div className="wrapper">
 
                 {/* section */}
-                <div className="section section-gray">
+                <div className="section section-gray" style={{minHeight: '100vh'}}>
                     <Container>
-                        <h3 className="section-title">Add Product</h3>
+                        <h3
+                            style={{textAlign: 'center',  textTransform: 'capitalize', marginTop: '40px'}}
+                            className="section-title">
+                            Add Product
+                        </h3>
                         <Row>
                             <Col md="3">
                                 <AdminNav/>
                             </Col>
 
 
-                            <Col md="7" sm="9" style={{margin: '0 auto', marginTop: '50px'}}>
+                            <Col md="7" sm="9" style={{margin: '0 auto'}}>
+
+
+
+                                {loading ? (
+                                    <h4 className="title" style={{textAlign: 'center', marginTop: '30px'}}>
+                                        <small>Loading..</small>
+                                    </h4>
+                                ) : (
+                                    <h4 className="title" style={{textAlign: 'center', marginTop: '30px'}}>
+                                        <small>Add A Product</small>
+                                    </h4>
+                                )}
+
 
                                 <div style={{textAlign: 'center'}}>
 
@@ -133,7 +151,7 @@ const ProductCreate = () => {
                 </div>
 
                 {/* section */}
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );

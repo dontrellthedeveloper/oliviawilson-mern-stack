@@ -14,6 +14,8 @@ import {
 import FooterEcommerce from "components/Footers/FooterEcommerce.js";
 import WhiteNavbar2 from "../../components/nav/WhiteNavbar";
 import {Link} from "react-router-dom";
+import UserNav from "../../components/nav/UserNav";
+import FooterBlack from "../../components/Footers/FooterBlack";
 
 const Password = () => {
     const [password, setPassword] = useState("");
@@ -81,56 +83,20 @@ const Password = () => {
             <div className="wrapper">
 
                 {/* section */}
-                <div className="section section-gray">
+                <div className="section section-gray" style={{minHeight: '100vh'}}>
                     <Container>
-                        <h3 className="section-title">Change Password</h3>
+                        <h3
+                            style={{textAlign: 'center',  textTransform: 'capitalize', marginTop: '40px'}}
+                            className="section-title">
+                            Change Password
+                        </h3>
                         <Row>
                             <Col md="3">
-                                <Card className="card-refine" style={{marginTop: '70px'}}>
-                                    <div
-                                        aria-expanded={true}
-                                        aria-multiselectable={true}
-                                        className="panel-group"
-                                        id="accordion"
-                                    >
-
-                                        <CardHeader className="card-collapse" id="priceRanger" role="tab">
-                                            <h5 className="mb-0 panel-title">
-                                                <Link to='/user/history'
-                                                >
-                                                    Purchase History
-
-                                                </Link>
-                                            </h5>
-                                        </CardHeader>
-
-                                        <CardHeader className="card-collapse" id="designer" role="tab">
-                                            <h5 className="mb-0 panel-title">
-                                                <Link to='/user/password'
-                                                >
-                                                    Change Password
-
-                                                </Link>
-                                            </h5>
-                                        </CardHeader>
-
-                                        <CardHeader className="card-collapse" id="clothingGear" role="tab">
-                                            <h5 className="mb-0 panel-title">
-                                                <Link to='/user/wishlist'
-                                                >
-                                                    Wishlist
-
-                                                </Link>
-                                            </h5>
-                                        </CardHeader>
-
-                                    </div>
-                                </Card>
-                                {/* end card */}
+                                <UserNav/>
                             </Col>
 
 
-                            <Col md="7" style={{margin: '0 auto'}}>
+                            <Col md="7" style={{margin: '30px auto 0'}}>
 
 
                                 {loading ? (
@@ -138,7 +104,7 @@ const Password = () => {
                                     <small>Loading..</small>
                                 </h4>
                                 ) : (
-                                <h4 className="title">
+                                <h4 className="title" style={{textAlign: 'center'}}>
                                     <small>Change Password</small>
                                 </h4>
                                 )}
@@ -150,7 +116,7 @@ const Password = () => {
                 </div>
 
                 {/* section */}
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );

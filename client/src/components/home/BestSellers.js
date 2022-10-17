@@ -45,7 +45,7 @@ const BestSellers = () => {
                 ) : (
                     <>
                         {products.map((product) => (
-                            <Col md="4" key={product._id}>
+                            <Col md="4" key={product._id} style={{minHeight: '600px'}}>
                                 <ProductCard product={product} />
                             </Col>
                         ))}

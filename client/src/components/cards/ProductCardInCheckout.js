@@ -111,7 +111,22 @@ const ProductCardInCheckout = ({ p, getTotal }) => {
         </td>
         <td>{p.title}</td>
         <td>${p.price}</td>
-        <td>{p.brand}</td>
+        <td className="text-center">{p.brand}</td>
+        <td className="text-center">
+            {p.shipping === "Yes" ? (
+                <CheckCircleOutlined className="text-success" />
+            ) : (
+                <CloseCircleOutlined className="text-danger" />
+            )}
+        </td>
+        <td className="text-center">
+            <input
+                type="number"
+                className="form-control"
+                value={p.count}
+                onChange={handleQuantityChange}
+            />
+        </td>
         <td>
             <select
                 onChange={handleColorChange}
@@ -132,21 +147,8 @@ const ProductCardInCheckout = ({ p, getTotal }) => {
                     ))}
             </select>
         </td>
-        <td className="text-center">
-            <input
-                type="number"
-                className="form-control"
-                value={p.count}
-                onChange={handleQuantityChange}
-            />
-        </td>
-        <td className="text-center">
-            {p.shipping === "Yes" ? (
-                <CheckCircleOutlined className="text-success" />
-            ) : (
-                <CloseCircleOutlined className="text-danger" />
-            )}
-        </td>
+
+
         <td className="text-center">
             <CloseOutlined
                 onClick={handleRemove}

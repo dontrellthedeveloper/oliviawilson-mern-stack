@@ -26,7 +26,7 @@ const Payment = () => {
         <>
             <WhiteNavbar2 />
             <div className="main">
-                <div className="section" style={{marginTop: '40px'}}>
+                <div className="section" style={{minHeight: '100vh', marginTop: '40px'}}>
                     <Container>
 
 

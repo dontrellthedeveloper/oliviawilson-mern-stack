@@ -87,7 +87,7 @@ const Product = ({ match }) => {
         <>
             <WhiteNavbar2 />
             <div className="main">
-                <div className="section" style={{marginTop: '70px', background: '#eeeeee'}}>
+                <div className="section" style={{marginTop: '70px', background: '#eeeeee',minHeight: '100vh'}} >
                     <Container>
 
                         <Row className="title-row">

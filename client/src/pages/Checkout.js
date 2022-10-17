@@ -180,7 +180,7 @@ const Checkout = ({ history }) => {
             <WhiteNavbar2 />
             {/*<ProductPageHeader />*/}
             <div className="main">
-                <div className="section section-gray" style={{marginTop: '40px'}}>
+                <div className="section section-gray" style={{minHeight: '100vh', marginTop: '40px'}}>
                     <Container>
 
 

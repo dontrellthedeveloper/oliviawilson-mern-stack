@@ -52,13 +52,14 @@ const SectionHeader = () => {
                 autoPlay
             >
               <source
-                  src={require("assets/video/fireworks.mp4")}
+                  src={require("assets/video/olivia-header.mp4")}
                   type="video/mp4"
               ></source>
               Video not supported
             </video>
             <div className="content-center">
               <Container className="upper-container text-center">
+
 
 
                   <img src={require("assets/img/ecommerce/olivia-wilson-logo-light.png")}  alt=""/>

@@ -18,6 +18,7 @@ import {
 import FooterEcommerce from "components/Footers/FooterEcommerce.js";
 import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
 import AdminNav from "../../../components/nav/AdminNav";
+import FooterBlack from "../../../components/Footers/FooterBlack";
 
 
 
@@ -76,9 +77,13 @@ const CreateCouponPage = () => {
             <div className="wrapper">
 
                 {/* section */}
-                <div className="section section-gray">
+                <div className="section section-gray" style={{minHeight: '100vh'}}>
                     <Container>
-                        <h3 className="section-title">Coupons</h3>
+                        <h3
+                            style={{textAlign: 'center',  textTransform: 'capitalize', marginTop: '40px'}}
+                            className="section-title">
+                            Coupons
+                        </h3>
                         <Row>
                             <Col md="3">
                                 <AdminNav/>
@@ -88,13 +93,13 @@ const CreateCouponPage = () => {
                             <Col md="7" style={{margin: '0 auto'}}>
 
                                 {loading ? (
-                                <h4 className="title">
-                                    <small>Loading...</small>
-                                </h4>
+                                    <h4 className="title" style={{textAlign: 'center', marginTop: '30px'}}>
+                                        <small>Loading..</small>
+                                    </h4>
                                 ) : (
-                                <h4 className="title">
-                                    <small>Create Coupon</small>
-                                </h4>
+                                    <h4 className="title" style={{textAlign: 'center', marginTop: '30px'}}>
+                                        <small>Create Coupon</small>
+                                    </h4>
                                 )}
 
 
@@ -210,7 +215,7 @@ const CreateCouponPage = () => {
                 </div>
 
                 {/* section */}
-                <FooterEcommerce />
+                <FooterBlack />
             </div>
         </>
     );
