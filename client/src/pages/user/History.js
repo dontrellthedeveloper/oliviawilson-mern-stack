@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
-import UserNav from "../../components/nav/UserNav";
 import { getUserOrders } from "../../functions/user";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-import { toast } from "react-toastify";
 import ShowPaymentInfo from "../../components/cards/ShowPaymentInfo";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import Invoice from "../../components/order/Invoice";
+import {
+    Card,
+    CardHeader,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../components/nav/WhiteNavbar";
+import {Link} from "react-router-dom";
 
 const History = () => {
+
     const [orders, setOrders] = useState([]);
     const { user } = useSelector((state) => ({ ...state }));
 
@@ -62,7 +71,7 @@ const History = () => {
         <PDFDownloadLink
             document={<Invoice order={order} />}
             fileName="invoice.pdf"
-            className="btn btn-sm btn-block btn-outline-primary"
+            className="btn btn-sm btn-block btn-outline-secondary text-secondary"
         >
             Download PDF
         </PDFDownloadLink>
@@ -79,21 +88,83 @@ const History = () => {
             </div>
         ));
 
+
+    document.documentElement.classList.remove("nav-open");
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <UserNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Purchase History</h3>
+                        <Row>
+                            <Col md="3">
+                                <Card className="card-refine" style={{marginTop: '70px'}}>
+                                    <div
+                                        aria-expanded={true}
+                                        aria-multiselectable={true}
+                                        className="panel-group"
+                                        id="accordion"
+                                    >
+
+                                        <CardHeader className="card-collapse" id="priceRanger" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <Link to='/user/history'
+                                                >
+                                                    Purchase History
+
+                                                </Link>
+                                            </h5>
+                                        </CardHeader>
+
+                                        <CardHeader className="card-collapse" id="designer" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <Link to='/user/password'
+                                                >
+                                                    Change Password
+
+                                                </Link>
+                                            </h5>
+                                        </CardHeader>
+
+                                        <CardHeader className="card-collapse" id="clothingGear" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <Link to='/user/wishlist'
+                                                >
+                                                    Wishlist
+
+                                                </Link>
+                                            </h5>
+                                        </CardHeader>
+
+                                    </div>
+                                </Card>
+                                {/* end card */}
+                            </Col>
+
+
+                            <Col md="9">
+                                <h4 className="title">
+                                    <small>{orders.length > 0 ? "Your purchase orders" : "No purchase orders"}
+                                    </small>
+                                </h4>
+
+
+                                {showEachOrders()}
+
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
-                <div className="col text-center">
-                    <h4>
-                        {orders.length > 0 ? "User purchase orders" : "No purchase orders"}
-                    </h4>
-                    {showEachOrders()}
-                </div>
+
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default History;

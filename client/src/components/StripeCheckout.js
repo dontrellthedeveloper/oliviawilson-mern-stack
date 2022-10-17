@@ -5,7 +5,6 @@ import { createPaymentIntent } from "../functions/stripe";
 import { Link } from "react-router-dom";
 import { Card } from "antd";
 import { DollarOutlined, CheckOutlined, SwapOutlined } from "@ant-design/icons";
-import Laptop from "../images/laptop.png";
 import { createOrder, emptyUserCart } from "../functions/user";
 
 const StripeCheckout = ({ history }) => {
@@ -118,15 +117,14 @@ const StripeCheckout = ({ history }) => {
                 </div>
             )}
             <div className="text-center pb-5">
+                <img
+                    width='300px'
+                    src={require("assets/img/ecommerce/olivia-wilson-logo-dark.png")}
+                />
                 <Card
                     cover={
                         <img
-                            src={Laptop}
-                            style={{
-                                height: "200px",
-                                objectFit: "cover",
-                                marginBottom: "-50px",
-                            }}
+                            width='300px'
                         />
                     }
                     actions={[

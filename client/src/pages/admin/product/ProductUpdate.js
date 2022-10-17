@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getProduct, updateProduct } from "../../../functions/product";
 import { getCategories, getCategorySubs } from "../../../functions/category";
-import FileUpload from "../../../components/forms/FileUpload";
-import { LoadingOutlined } from "@ant-design/icons";
 import ProductUpdateForm from "../../../components/forms/ProductUpdateForm";
+import {
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
+import AdminNav from "../../../components/nav/AdminNav";
+
+
+
 
 const initialState = {
     title: "",
@@ -22,6 +30,8 @@ const initialState = {
     color: "",
     brand: "",
 };
+
+
 
 const ProductUpdate = ({ match, history }) => {
     // state
@@ -115,47 +125,57 @@ const ProductUpdate = ({ match, history }) => {
         setArrayOfSubs([]);
     };
 
+
+
+    document.documentElement.classList.remove("nav-open");
+
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Update Product</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+                            <Col md="7" sm="9" style={{margin: '0 auto', marginTop: '10px'}}>
+
+
+
+                                <ProductUpdateForm
+                                    handleSubmit={handleSubmit}
+                                    handleChange={handleChange}
+                                    setValues={setValues}
+                                    values={values}
+                                    handleCategoryChange={handleCategoryChange}
+                                    categories={categories}
+                                    subOptions={subOptions}
+                                    arrayOfSubs={arrayOfSubs}
+                                    setArrayOfSubs={setArrayOfSubs}
+                                    selectedCategory={selectedCategory}
+                                    setLoading={setLoading}
+                                />
+
+
+
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
 
-                <div className="col-md-10">
-                    {loading ? (
-                        <LoadingOutlined className="text-danger h1" />
-                    ) : (
-                        <h4>Product update</h4>
-                    )}
-
-                    {/* {JSON.stringify(values)} */}
-
-                    <div className="p-3">
-                        <FileUpload
-                            values={values}
-                            setValues={setValues}
-                            setLoading={setLoading}
-                        />
-                    </div>
-
-                    <ProductUpdateForm
-                        handleSubmit={handleSubmit}
-                        handleChange={handleChange}
-                        setValues={setValues}
-                        values={values}
-                        handleCategoryChange={handleCategoryChange}
-                        categories={categories}
-                        subOptions={subOptions}
-                        arrayOfSubs={arrayOfSubs}
-                        setArrayOfSubs={setArrayOfSubs}
-                        selectedCategory={selectedCategory}
-                    />
-                    <hr />
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default ProductUpdate;

@@ -1,6 +1,23 @@
+/*!
+
+=========================================================
+* Paper Kit PRO React - v1.3.1
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/paper-kit-pro-react
+* Copyright 2022 Creative Tim (http://www.creative-tim.com)
+
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+*/
+
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.css";
@@ -15,12 +32,10 @@ const store = createStore(rootReducer, composeWithDevTools());
 
 
 ReactDOM.render(
-    // <React.StrictMode>
     <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
     </Provider>,
-    // </React.StrictMode>,
     document.getElementById("root")
 );

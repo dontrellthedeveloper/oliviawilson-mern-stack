@@ -2,6 +2,17 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import {
+    Button,
+    Card,
+    CardTitle,
+    Form,
+    Input,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import ColorNavbar from "components/nav/ColorNavbar.js";
 
 const ForgotPassword = ({ history }) => {
     const [email, setEmail] = useState("");
@@ -36,30 +47,81 @@ const ForgotPassword = ({ history }) => {
             });
     };
 
-    return (
-        <div className="container col-md-6 offset-md-3 p-5">
-            {loading ? (
-                <h4 className="text-danger">Loading</h4>
-            ) : (
-                <h4>Forgot Password</h4>
-            )}
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="email"
-                    className="form-control"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Type your email"
-                    autoFocus
-                />
-                <br />
-                <button className="btn btn-raised" disabled={!email}>
-                    Submit
-                </button>
-            </form>
-        </div>
+    document.documentElement.classList.remove("nav-open");
+    React.useEffect(() => {
+        document.body.classList.add("register-page");
+        document.body.classList.add("full-screen");
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        return function cleanup() {
+            document.body.classList.remove("register-page");
+            document.body.classList.remove("full-screen");
+        };
+    });
+
+    return (
+        <>
+            <ColorNavbar />
+            <div className="wrapper">
+                <div
+                    className="page-header"
+                    style={{
+                        backgroundImage:
+                            "url(" + require("assets/img/sections/bruno-abatti.jpg") + ")",
+                    }}
+                >
+                    <div className="filter" />
+                    <Container>
+                        <Row>
+
+                            <Col className="mr-auto" lg="12" md="12" sm="12" xs="12">
+                                <Card className="card-register" style={{margin: '0 auto', backgroundColor: 'transparent'}}>
+                                    <div style={{ margin: '0 auto'}}>
+                                        <img src={require("assets/img/ecommerce/olivia-wilson-logo-light.png")} width='200px'  alt=""/>
+                                    </div>
+
+                                    {loading ? (
+                                    <CardTitle className="text-center" tag="h3" style={{color: '#fff'}}>
+                                        Forgot Password
+                                    </CardTitle>
+                                    ) : (
+                                    <CardTitle className="text-center" tag="h3" style={{color: '#fff'}}>
+                                        Forgot Password
+                                    </CardTitle>
+                                    )}
+
+                                    <div className="division">
+
+                                    </div>
+                                    <Form className="register-form" onSubmit={handleSubmit}>
+                                        <Input
+                                            placeholder="Enter Your Email..."
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            autoFocus
+                                            className='login-placeholder'
+                                            style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px',}}
+                                        />
+                                        <Button block className="btn-round" type='submit' disabled={!email} style={{padding: '12px'}} color="default">
+                                            Submit
+                                        </Button>
+                                    </Form>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <div className="demo-footer text-center">
+                        <h6>
+                            © {new Date().getFullYear()}, made with{" "}
+                            <i className="fa fa-heart heart" /> by Creative Tim
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </>
     );
-};
+}
 
 export default ForgotPassword;

@@ -1,7 +1,19 @@
 import React, { useState } from "react";
-import UserNav from "../../components/nav/UserNav";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
+import {
+    Button,
+    Card,
+    CardHeader,
+    FormGroup,
+    Input,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../components/nav/WhiteNavbar";
+import {Link} from "react-router-dom";
 
 const Password = () => {
     const [password, setPassword] = useState("");
@@ -26,44 +38,122 @@ const Password = () => {
     };
 
     const passwordUpdateForm = () => (
+
         <form onSubmit={handleSubmit}>
-            <div className="form-group">
-                <label>Your Password</label>
-                <input
+            <FormGroup>
+                <Input
                     type="password"
                     onChange={(e) => setPassword(e.target.value)}
-                    className="form-control"
                     placeholder="Enter new password"
+                    type="text"
                     disabled={loading}
                     value={password}
                 />
-                <button
-                    className="btn btn-primary"
+            </FormGroup>
+
+            <div style={{textAlign: 'center'}}>
+
+                <Button
                     disabled={!password || password.length < 6 || loading}
+                    className="btn-round mr-1 mb-3"
+                    color="default"
+                    outline
                 >
-                    Submit
-                </button>
+                    Save
+                </Button>
             </div>
         </form>
+
+
     );
 
+
+
+
+    document.documentElement.classList.remove("nav-open");
+
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <UserNav />
+        <>
+
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Change Password</h3>
+                        <Row>
+                            <Col md="3">
+                                <Card className="card-refine" style={{marginTop: '70px'}}>
+                                    <div
+                                        aria-expanded={true}
+                                        aria-multiselectable={true}
+                                        className="panel-group"
+                                        id="accordion"
+                                    >
+
+                                        <CardHeader className="card-collapse" id="priceRanger" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <Link to='/user/history'
+                                                >
+                                                    Purchase History
+
+                                                </Link>
+                                            </h5>
+                                        </CardHeader>
+
+                                        <CardHeader className="card-collapse" id="designer" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <Link to='/user/password'
+                                                >
+                                                    Change Password
+
+                                                </Link>
+                                            </h5>
+                                        </CardHeader>
+
+                                        <CardHeader className="card-collapse" id="clothingGear" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <Link to='/user/wishlist'
+                                                >
+                                                    Wishlist
+
+                                                </Link>
+                                            </h5>
+                                        </CardHeader>
+
+                                    </div>
+                                </Card>
+                                {/* end card */}
+                            </Col>
+
+
+                            <Col md="7" style={{margin: '0 auto'}}>
+
+
+                                {loading ? (
+                                <h4 className="title">
+                                    <small>Loading..</small>
+                                </h4>
+                                ) : (
+                                <h4 className="title">
+                                    <small>Change Password</small>
+                                </h4>
+                                )}
+                                {passwordUpdateForm()}
+
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
-                <div className="col">
-                    {loading ? (
-                        <h4 className="text-danger">Loading..</h4>
-                    ) : (
-                        <h4>Password Update</h4>
-                    )}
-                    {passwordUpdateForm()}
-                </div>
+
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default Password;

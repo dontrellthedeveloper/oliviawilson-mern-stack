@@ -1,20 +1,63 @@
 import React, { useState } from "react";
-import { Card, Tooltip } from "antd";
-import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
-import laptop from "../../images/laptop.png";
-import { Link } from "react-router-dom";
+import { Tooltip } from "antd";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import {Link, useHistory} from "react-router-dom";
 import { showAverage } from "../../functions/rating";
+import { addToWishlist } from "../../functions/user";
 import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 
-const { Meta } = Card;
+import {
+    Button,
+    Card,
+    CardBody,
+    CardTitle,
+    Carousel,
+    CarouselItem,
+} from "reactstrap";
+import {toast} from "react-toastify";
+
 
 const ProductCard = ({ product }) => {
     const [tooltip, setTooltip] = useState("Click to add");
+    const [wishlistTip, setWishlistTip] = useState("Add to Wishlist");
+    const [wishlistTip2, setWishlistTip2] = useState("Login to Add to Wishlist");
+
+    // carousel states and functions
+    const [activeIndex, setActiveIndex] = React.useState(0);
+    const [animating, setAnimating] = React.useState(false);
+    const onExiting = () => {
+        setAnimating(true);
+    };
+    const onExited = () => {
+        setAnimating(false);
+    };
+    const next = () => {
+        if (animating) return;
+        const nextIndex =
+            activeIndex === images.length - 1 ? 0 : activeIndex + 1;
+        setActiveIndex(nextIndex);
+    };
+    const previous = () => {
+        if (animating) return;
+        const nextIndex =
+            activeIndex === 0 ? images.length - 1 : activeIndex - 1;
+        setActiveIndex(nextIndex);
+    };
+    const goToIndex = (newIndex) => {
+        if (animating) return;
+        setActiveIndex(newIndex);
+    };
+
+
+
 
     // redux
     const { user, cart } = useSelector((state) => ({ ...state }));
     const dispatch = useDispatch();
+
+    // router
+    let history = useHistory();
 
     const handleAddToCart = () => {
         // create cart array
@@ -50,40 +93,168 @@ const ProductCard = ({ product }) => {
         }
     };
 
+
+
+    const handleAddToWishlist = (e) => {
+        e.preventDefault();
+        addToWishlist(product._id, user.token).then((res) => {
+            console.log("ADDED TO WISHLIST", res.data);
+            toast.success("Added to wishlist");
+            // show tooltip
+            setWishlistTip("Added to Wishlist");
+            // setWishlistTip2("Added to Wishlist");
+            // history.push("/user/wishlist");
+        });
+    };
+
+
+
     // destructure
     const { images, title, description, slug, price } = product;
     return (
         <>
-            {product && product.ratings && product.ratings.length > 0 ? (
-                showAverage(product)
-            ) : (
-                <div className="text-center pt-1 pb-3">No rating yet</div>
-            )}
+            <Card className="card-product card-plain">
 
-            <Card
-                cover={
-                    <img
-                        src={images && images.length ? images[0].url : laptop}
-                        style={{ height: "150px", objectFit: "cover" }}
-                        className="p-1"
-                    />
-                }
-                actions={[
-                    <Link to={`/product/${slug}`}>
-                        <EyeOutlined className="text-warning" /> <br /> View Product
-                    </Link>,
-                    <Tooltip title={tooltip}>
-                        <a onClick={handleAddToCart} disabled={product.quantity < 1}>
-                            <ShoppingCartOutlined className="text-danger" /> <br />
+                <div className="card-image">
+                    <div className='show-images_container'>
+                        <Link to={`/product/${slug}`}>
+
+                            {images && images.length ? (
+                                    <Carousel
+                                        activeIndex={activeIndex}
+                                        next={next}
+                                        previous={previous}
+                                        showArrows={true}
+                                    >
+                                        {images && images.map((i) => {
+                                            return (
+                                                <CarouselItem
+                                                    onExiting={onExiting}
+                                                    onExited={onExited}
+                                                    key={i.public_id}
+                                                >
+                                                    <img
+                                                        className="img-rounded img-responsive"
+                                                        // src={images && images.length ? images[0].url : "laptop"}
+                                                        src={i.url} alt={i.public_id}
+                                                    />
+                                                </CarouselItem>
+                                            );
+                                        })}
+                                        <button
+                                            className="left carousel-control carousel-control-prev"
+                                            data-slide="prev"
+                                            // href="#pablo"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                previous();
+                                            }}
+                                            role="button"
+                                        >
+                                            <span className="fa fa-angle-left" />
+                                            <span className="sr-only">Previous</span>
+                                        </button>
+                                        <button
+                                            className="right carousel-control carousel-control-next"
+                                            data-slide="next"
+                                            // href="#pablo"
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                next();
+                                            }}
+                                            role="button"
+                                        >
+                                            <span className="fa fa-angle-right" />
+                                            <span className="sr-only">Next</span>
+                                        </button>
+                                    </Carousel>
+                            ) : (
+                                <Card cover={<img src='' className="mb-3 card-image" />}></Card>
+                            )}
+                        </Link>
+
+
+
+
+
+
+                        {user ? (
+                            <Tooltip title={wishlistTip}>
+                                <Button
+                                    onClick={handleAddToWishlist}
+                                    disabled={!user}
+                                    className="btn-just-icon btn-border mr-1 mb-3 show-image_btn2"
+                                    color="pinterest"
+                                    style={{border: 'none'}}
+                                >
+                                    <i className="fa fa-heart" />
+                                </Button>
+                            </Tooltip>
+                        ) : (
+                            <Tooltip title={wishlistTip2}>
+                                <Button
+                                    // disabled={!user}
+                                    className="btn-just-icon btn-border mr-1 mb-3 show-image_btn2"
+                                    color="pinterest"
+                                    style={{border: 'none'}}
+                                >
+                                    <i className="fa fa-heart" />
+                                </Button>
+                            </Tooltip>
+
+                        )}
+
+
+
+
+
+
+
+                        <Tooltip title={tooltip}>
+                        <Button
+                            onClick={handleAddToCart} disabled={product.quantity < 1}
+                            className="btn-round mr-1 mb-3 show-image_btn"
+                            color="default"
+                            outline
+                            type="button"
+                        >
                             {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
-                        </a>
-                    </Tooltip>,
-                ]}
-            >
-                <Meta
-                    title={`${title} - $${price}`}
-                    description={`${description && description.substring(0, 40)}...`}
-                />
+                        </Button>
+                        </Tooltip>
+                    </div>
+
+                    {product && product.ratings && product.ratings.length > 0 ? (
+
+                            showAverage(product)
+
+                    ) : (
+                        <div className="text-center pt-2 pb-1">No rating yet</div>
+                    )}
+
+                    <CardBody style={{textAlign: 'center'}}>
+                        <div className="card-description" style={{marginTop: '10px'}}>
+                            <CardTitle tag="h5">{title}
+                            <span className="card-description" style={{marginTop: '5px'}}>
+                                {/*{`${description && description.substring(0, 40)}...`}*/}
+
+
+
+                                {/*<span className="mr-1">$ {price}</span>*/}
+                            </span>
+                            </CardTitle>
+
+                            <CardTitle style={{marginBottom: '10px'}} tag="h5">
+                                <span className="card-description" style={{marginTop: '5px'}}>
+
+
+                                    <small>${price}</small>
+
+                                </span>
+                            </CardTitle>
+                        </div>
+
+                    </CardBody>
+                </div>
             </Card>
         </>
     );

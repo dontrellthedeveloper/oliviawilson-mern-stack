@@ -1,6 +1,5 @@
 import React from "react";
 import ModalImage from "react-modal-image";
-import laptop from "../../images/laptop.png";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -9,7 +8,8 @@ import {
     CloseOutlined,
 } from "@ant-design/icons";
 
-const ProductCardInCheckout = ({ p }) => {
+
+const ProductCardInCheckout = ({ p, getTotal }) => {
     const colors = ["Black", "Brown", "Silver", "White", "Blue"];
     let dispatch = useDispatch();
 
@@ -91,63 +91,72 @@ const ProductCardInCheckout = ({ p }) => {
     };
 
     return (
-        <tbody>
-        <tr>
-            <td>
-                <div style={{ width: "100px", height: "auto" }}>
-                    {p.images.length ? (
-                        <ModalImage small={p.images[0].url} large={p.images[0].url} />
+
+    <tbody>
+    <tr>
+        <td>
+            <div className="img-container">
+                {p.images.length ? (
+                    <img
+                        alt="..."
+                        src={p.images[0].url}
+                    />
                     ) : (
-                        <ModalImage small={laptop} large={laptop} />
-                    )}
-                </div>
-            </td>
-            <td>{p.title}</td>
-            <td>${p.price}</td>
-            <td>{p.brand}</td>
-            <td>
-                <select
-                    onChange={handleColorChange}
-                    name="color"
-                    className="form-control"
-                >
-                    {p.color ? (
-                        <option value={p.color}>{p.color}</option>
-                    ) : (
-                        <option>Select</option>
-                    )}
-                    {colors
-                        .filter((c) => c !== p.color)
-                        .map((c) => (
-                            <option key={c} value={c}>
-                                {c}
-                            </option>
-                        ))}
-                </select>
-            </td>
-            <td className="text-center">
-                <input
-                    type="number"
-                    className="form-control"
-                    value={p.count}
-                    onChange={handleQuantityChange}
-                />
-            </td>
-            <td className="text-center">
-                {p.shipping === "Yes" ? (
-                    <CheckCircleOutlined className="text-success" />
-                ) : (
-                    <CloseCircleOutlined className="text-danger" />
+                        <img
+                            alt="..."
+                            src=''
+                        />
                 )}
-            </td>
-            <td className="text-center">
-                <CloseOutlined
-                    onClick={handleRemove}
-                    className="text-danger pointer"
-                />
-            </td>
-        </tr>
-        </tbody>
+            </div>
+        </td>
+        <td>{p.title}</td>
+        <td>${p.price}</td>
+        <td>{p.brand}</td>
+        <td>
+            <select
+                onChange={handleColorChange}
+                name="color"
+                className="form-control"
+            >
+                {p.color ? (
+                    <option value={p.color}>{p.color}</option>
+                ) : (
+                    <option>Select</option>
+                )}
+                {colors
+                    .filter((c) => c !== p.color)
+                    .map((c) => (
+                        <option key={c} value={c}>
+                            {c}
+                        </option>
+                    ))}
+            </select>
+        </td>
+        <td className="text-center">
+            <input
+                type="number"
+                className="form-control"
+                value={p.count}
+                onChange={handleQuantityChange}
+            />
+        </td>
+        <td className="text-center">
+            {p.shipping === "Yes" ? (
+                <CheckCircleOutlined className="text-success" />
+            ) : (
+                <CloseCircleOutlined className="text-danger" />
+            )}
+        </td>
+        <td className="text-center">
+            <CloseOutlined
+                onClick={handleRemove}
+                className="text-danger pointer"
+            />
+        </td>
+    </tr>
+    </tbody>
+
+
     );
 };
 

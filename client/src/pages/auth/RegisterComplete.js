@@ -3,8 +3,19 @@ import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import {useDispatch} from "react-redux";
 import { createOrUpdateUser } from "../../functions/auth";
+import {
+    Button,
+    Card,
+    CardTitle,
+    Form,
+    Input,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import ColorNavbar from "components/nav/ColorNavbar.js";
 
-const RegisterComplete = ({ history }) => {
+const RegisterComplete = ({history}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -69,34 +80,120 @@ const RegisterComplete = ({ history }) => {
     };
 
     const completeRegistrationForm = () => (
-        <form onSubmit={handleSubmit}>
-            <input type="email" className="form-control" value={email} disabled />
+        // <form onSubmit={handleSubmit}>
+        //     <input type="email" className="form-control" value={email} disabled />
+        //
+        //     <input
+        //         type="password"
+        //         className="form-control"
+        //         value={password}
+        //         onChange={(e) => setPassword(e.target.value)}
+        //         placeholder="Password"
+        //         autoFocus
+        //     />
+        //     <br />
+        //     <button type="submit" className="btn btn-raised">
+        //         Complete Registration
+        //     </button>
+        // </form>
 
-            <input
+
+
+        <Form className="register-form" onSubmit={handleSubmit}>
+            <Input
+                value={email} disabled
+                placeholder="Email..."
+                type="email"
+                className='login-placeholder'
+                style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px',}}
+            />
+            <Input
+                placeholder="Password..."
                 type="password"
-                className="form-control"
+                className='login-placeholder'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
                 autoFocus
+                style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px'}}
             />
-            <br />
-            <button type="submit" className="btn btn-raised">
-                Complete Registration
-            </button>
-        </form>
+
+
+            <Button block type='submit' className="btn-round" style={{padding: '12px'}} color="default">
+                Sign Up
+            </Button>
+        </Form>
     );
 
+
+
+
+
+
+
+
+
+
+    document.documentElement.classList.remove("nav-open");
+    React.useEffect(() => {
+        document.body.classList.add("register-page");
+        document.body.classList.add("full-screen");
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        return function cleanup() {
+            document.body.classList.remove("register-page");
+            document.body.classList.remove("full-screen");
+        };
+    });
+
+
+
     return (
-        <div className="container p-5">
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-                    <h4>Register Complete</h4>
-                    {completeRegistrationForm()}
+        <>
+            <ColorNavbar />
+            <div className="wrapper">
+                <div
+                    className="page-header"
+                    style={{
+                        backgroundImage:
+                            "url(" + require("assets/img/sections/bruno-abatti.jpg") + ")",
+                    }}
+                >
+                    <div className="filter" />
+                    <Container>
+                        <Row>
+
+                            <Col className="mr-auto" lg="12" md="12" sm="12" xs="12">
+                                <Card className="card-register" style={{margin: '0 auto', backgroundColor: 'transparent'}}>
+                                    <div style={{ margin: '0 auto'}}>
+                                        <img src={require("assets/img/ecommerce/olivia-wilson-logo-light.png")} width='200px'  alt=""/>
+                                    </div>
+                                    <CardTitle className="text-center" tag="h3" style={{color: '#fff'}}>
+                                        Complete Registration
+                                    </CardTitle>
+
+
+                                    <div className="division">
+                                        {/*<div className="line l" />*/}
+                                        {/*<span>or</span>*/}
+                                        {/*<div className="line r" />*/}
+                                    </div>
+
+                                    {completeRegistrationForm()}
+
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <div className="demo-footer text-center">
+                        <h6>
+                            © {new Date().getFullYear()}, made with{" "}
+                            <i className="fa fa-heart heart" /> by Creative Tim
+                        </h6>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default RegisterComplete;

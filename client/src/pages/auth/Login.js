@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
-import { Button } from "antd";
-import { MailOutlined, GoogleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { createOrUpdateUser } from "../../functions/auth";
+import {
+    Button,
+    Card,
+    CardTitle,
+    Form,
+    Input,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import ColorNavbar from "components/nav/ColorNavbar.js";
 
 
 const Login = ({ history }) => {
@@ -13,8 +22,8 @@ const Login = ({ history }) => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-
     const { user } = useSelector((state) => ({ ...state }));
+
 
     useEffect(() => {
         let intended = history.location.state;
@@ -49,15 +58,6 @@ const Login = ({ history }) => {
             // console.log(result);
             const { user } = result;
             const idTokenResult = await user.getIdTokenResult();
-
-            // dispatch({
-            //     type: "LOGGED_IN_USER",
-            //     payload: {
-            //         email: user.email,
-            //         token: idTokenResult.token,
-            //     },
-            // });
-            // history.push("/");
 
             createOrUpdateUser(idTokenResult.token)
                 .then((res) => {
@@ -111,76 +111,137 @@ const Login = ({ history }) => {
     };
 
     const loginForm = () => (
-        <form onSubmit={handleSubmit}>
-            <div className='form-group'>
-                <input
-                    type="email"
-                    className="form-control"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your email"
-                    autoFocus
-                />
-            </div>
-
-
-            <div className='form-group'>
-                <input
-                    type="password"
-                    className="form-control"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Your password"
-                />
-            </div>
-
-
-            <br/>
-            <Button
-                onClick={handleSubmit}
-                type="primary"
-                className="mb-3"
-                block
-                shape="round"
-                icon={<MailOutlined />}
-                size="large"
-                disabled={!email || password.length < 6}
-            >
-                Login with Email/Password
-            </Button>
-        </form>
+    <Form className="register-form" onSubmit={handleSubmit}>
+        <Input
+            placeholder="Email..."
+            type="email"
+            className='login-placeholder'
+            style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px',}}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoFocus
+        />
+        <Input
+            placeholder="Password..."
+            type="password"
+            className='login-placeholder'
+            style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px'}}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button
+            block
+            className="btn-round"
+            style={{padding: '12px'}}
+            color="default"
+            onClick={handleSubmit}
+        >
+            Login
+        </Button>
+    </Form>
     );
+
+
+    document.documentElement.classList.remove("nav-open");
+    React.useEffect(() => {
+        document.body.classList.add("register-page");
+        document.body.classList.add("full-screen");
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        return function cleanup() {
+            document.body.classList.remove("register-page");
+            document.body.classList.remove("full-screen");
+        };
+    })
+
 
     return (
-        <div className="container p-5">
-            <div className="row">
-                <div className="col-md-6 offset-md-3">
-                    {loading ? (
-                        <h4 className="text-danger">Loading...</h4>
-                    ) : (
-                        <h4>Login</h4>
-                    )}
-                    {loginForm()}
+        <>
+            <ColorNavbar />
+            <div className="wrapper">
+                <div
+                    className="page-header"
+                    style={{
+                        backgroundImage:
+                            "url(" + require("assets/img/sections/bruno-abatti.jpg") + ")",
+                    }}
+                >
+                    <div className="filter" />
+                    <Container>
+                        <Row>
 
-                    <Button
-                        onClick={googleLogin}
-                        type="danger"
-                        className="mb-3"
-                        block
-                        shape="round"
-                        icon={<GoogleOutlined />}
-                        size="large"
-                    >
-                        Login with Google
-                    </Button>
+                            <Col className="mr-auto" lg="12" md="12" sm="12" xs="12">
+                                <Card className="card-register" style={{margin: '0 auto', backgroundColor: 'transparent'}}>
+                                    <div style={{ margin: '0 auto'}}>
+                                        <img src={require("assets/img/ecommerce/olivia-wilson-logo-light.png")} width='200px'  alt=""/>
+                                    </div>
 
-                    <Link to="/forgot/password" className="float-right text-danger">
-                        Forgot Password
-                    </Link>
+                                    {loading ? (
+                                        <CardTitle className="text-center" tag="h3" style={{color: '#fff'}}>
+                                            Log In
+                                        </CardTitle>
+                                    ) : (
+                                        <CardTitle className="text-center" tag="h3" style={{color: '#fff'}}>
+                                            Log In
+                                        </CardTitle>
+                                    )}
+
+                                    <div className="division">
+
+                                    </div>
+
+
+                                    {loginForm()}
+
+
+                                        <Button
+                                            block
+                                            className="btn-round"
+                                            style={{padding: '12px'}}
+                                            color="google"
+                                            onClick={googleLogin}
+                                        >
+                                            <i className="fa fa-google" /> Login with Google
+                                        </Button>
+
+
+
+                                    <div className="login">
+                                        <p style={{color: '#fff', fontSize: '15px', fontWeight: '600'}}>
+                                            Dont have an account?{" "}
+                                            <Link to="/register"
+                                                  style={{ fontSize: '15px', fontWeight: '600'}}
+                                            >
+                                                Sign Up
+                                            </Link>
+                                            .
+                                        </p>
+                                    </div>
+
+                                    <div className="login">
+                                        <p style={{color: '#fff', fontSize: '15px', fontWeight: '600'}}>
+                                            {" "}
+                                            <Link to="/forgot/password"
+                                                  style={{ fontSize: '15px', fontWeight: '600'}}
+                                            >
+                                                Forgot Your Password?
+                                            </Link>
+                                            .
+                                        </p>
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+                    </Container>
+                    <div className="demo-footer text-center">
+                        <h6>
+                            © {new Date().getFullYear()}, made with{" "}
+                        </h6>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default Login;

@@ -1,0 +1,117 @@
+body {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+
+.login-placeholder::placeholder {
+    color: #fff;
+    font-size: 15px;
+}
+
+.search-placeholder::placeholder {
+    color: #66615B;
+    /*font-size: 15px;*/
+}
+
+.search-placeholder {
+    background-color: #f5f5f5 ;
+    /*color: #fff;*/
+    color: #66615B;
+    border-radius: 2rem;
+    border: none;
+}
+
+
+.show-images_container {
+    position: relative;
+    /*width: 50%;*/
+}
+
+.show-images_container img {
+    /*width: 100%;*/
+    /*height: auto;*/
+}
+
+
+.navbar__cart-icon {
+    color: #66615B;
+    font-size: 12px;
+}
+
+
+
+
+.show-images_container .show-image_btn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #66615B;
+    color: white;
+    font-size: 12px;
+    /*padding: 12px 24px;*/
+    /*border: none;*/
+    cursor: pointer;
+    /*border-radius: 5px;*/
+}
+
+
+.show-images_container .show-image_btn2 {
+    position: absolute;
+    top: 68%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #66615B;
+    color: white;
+    font-size: 12px;
+    /*padding: 12px 24px;*/
+    /*border: none;*/
+    cursor: pointer;
+    /*border-radius: 5px;*/
+}
+
+.hr-styles-product {
+    border: 1px solid #fff;
+    /*border-color: #fff;*/
+}
+
+
+.show-images_container .show-image_btn:hover {
+    background-color: black;
+}
+
+.show-images_container .show-image_btn2:hover {
+    background-color: black;
+}
+
+/*.show-image_btn {*/
+/*    display: none;*/
+/*}*/
+
+/*.show-img_img:hover + .show-image_btn {*/
+/*    display: block;*/
+/*}*/
+
+
+.show-images_container:hover .show-image_btn {
+    display: block;
+}
+
+.show-images_container:hover .show-image_btn2 {
+    display: block;
+}
+
+.show-image_btn {
+    display: none;
+}
+
+.show-image_btn2 {
+    display: none;
+}

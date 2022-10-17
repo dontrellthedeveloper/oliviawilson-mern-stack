@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategory, updateCategory } from "../../../functions/category";
 import {Link} from "react-router-dom";
 import CategoryForm from "../../../components/forms/CategoryForm";
+import {
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
+import AdminNav from "../../../components/nav/AdminNav";
 
 
 const CategoryUpdate = ({ history, match }) => {
@@ -40,28 +47,58 @@ const CategoryUpdate = ({ history, match }) => {
     };
 
 
+
+    document.documentElement.classList.remove("nav-open");
+
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Categories</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+                            <Col md="7" style={{margin: '0 auto'}}>
+                                {loading ? (
+                                    <h4 className="text-danger">
+                                        <small>Loading...</small>
+                                    </h4>
+                                ) : (
+                                <h4 className="title">
+                                    <small>Update Category</small>
+                                </h4>
+                                )}
+
+
+
+                                <CategoryForm
+                                    handleSubmit={handleSubmit}
+                                    name={name}
+                                    setName={setName}
+                                />
+
+
+                                <button className="btn btn-outline-primary"><Link to={`/admin/category`} >Cancel</Link></button>
+
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
-                <div className="col">
-                    {loading ? (
-                        <h4 className="text-danger">Loading..</h4>
-                    ) : (
-                        <h4>Update category</h4>
-                    )}
-                    <CategoryForm
-                        handleSubmit={handleSubmit}
-                        name={name}
-                        setName={setName}
-                    />
-                    <hr />
-                </div>
+
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default CategoryUpdate;

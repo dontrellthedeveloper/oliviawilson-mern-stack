@@ -20,7 +20,7 @@ export const showAverage = (p) => {
         // console.log("result", result);
 
         return (
-            <div className="text-center pt-1 pb-3">
+            <div className="text-center pt-2 pb-1">
         <span>
           <StarRating
               starDimension="20px"
@@ -29,7 +29,9 @@ export const showAverage = (p) => {
               rating={result}
               editing={false}
           />{" "}
-            ({p.ratings.length})
+            <span style={{marginLeft: '4px'}}>
+                {p.ratings.length}
+            </span>
         </span>
             </div>
         );

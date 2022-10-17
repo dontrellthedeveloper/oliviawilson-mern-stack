@@ -3,6 +3,8 @@ import { getProducts, getProductsCount } from "../../functions/product";
 import ProductCard from "../cards/ProductCard";
 import LoadingCard from "../cards/LoadingCard";
 import { Pagination } from "antd";
+import {Col} from "reactstrap";
+
 
 const BestSellers = () => {
     const [products, setProducts] = useState([]);
@@ -12,7 +14,7 @@ const BestSellers = () => {
 
     useEffect(() => {
         loadAllProducts();
-    }, [page]);
+    }, [page]); // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
         getProductsCount().then((res) => {
@@ -22,33 +24,37 @@ const BestSellers = () => {
 
     }, []);
 
+
+
     const loadAllProducts = () => {
         setLoading(true);
         // sort, order, limit
         getProducts("sold", "desc", page).then((res) => {
+            console.log(res.data)
             setProducts(res.data);
             setLoading(false);
         });
     };
 
+
     return (
         <>
-            <div className="container">
+            <>
                 {loading ? (
                     <LoadingCard count={3} />
                 ) : (
-                    <div className="row">
+                    <>
                         {products.map((product) => (
-                            <div key={product._id} className="col-md-4">
+                            <Col md="4" key={product._id}>
                                 <ProductCard product={product} />
-                            </div>
+                            </Col>
                         ))}
-                    </div>
+                    </>
                 )}
-            </div>
+            </>
 
-            <div className="row">
-                <nav className="col-md-4 offset-md-4 text-center pt-5 p-3">
+            <div className="row" style={{margin: '20px auto'}}>
+                <nav className="col-md-4 offset-md-4 text-center pt-5 p-3" style={{display: 'contents'}}>
                     <Pagination
                         current={page}
                         total={Math.round((productsCount / 3) * 10)}

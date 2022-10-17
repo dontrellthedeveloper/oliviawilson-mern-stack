@@ -11,6 +11,20 @@ import {
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
+
+// reactstrap components
+import {
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+
+// core components
+import FooterBlack from "components/Footers/FooterBlack.js";
+import WhiteNavbar2 from "../components/nav/WhiteNavbar";
+
+
+
 const Checkout = ({ history }) => {
     const [products, setProducts] = useState([]);
     const [total, setTotal] = useState(0);
@@ -91,7 +105,7 @@ const Checkout = ({ history }) => {
     const showAddress = () => (
         <>
             <ReactQuill theme="snow" value={address} onChange={setAddress} />
-            <button className="btn btn-primary mt-2" onClick={saveAddressToDb}>
+            <button className="btn btn-dark mt-2" onClick={saveAddressToDb}>
                 Save
             </button>
         </>
@@ -118,7 +132,7 @@ const Checkout = ({ history }) => {
                 type="text"
                 className="form-control"
             />
-            <button onClick={applyDiscountCoupon} className="btn btn-primary mt-2">
+            <button onClick={applyDiscountCoupon} className="btn btn-dark mt-2">
                 Apply
             </button>
         </>
@@ -156,70 +170,101 @@ const Checkout = ({ history }) => {
         });
     };
 
+
+    document.documentElement.classList.remove("nav-open");
+
+
     return (
-        <div className="row">
-            <div className="col-md-6">
-                <h4>Delivery Address</h4>
-                <br />
-                <br />
-                {showAddress()}
-                <hr />
-                <h4>Got Coupon?</h4>
-                <br />
-                {showApplyCoupon()}
-                <br />
-                {discountError && <p className="bg-danger p-2">{discountError}</p>}
-            </div>
+        <>
+            {/*<ColorNavbar />*/}
+            <WhiteNavbar2 />
+            {/*<ProductPageHeader />*/}
+            <div className="main">
+                <div className="section section-gray" style={{marginTop: '40px'}}>
+                    <Container>
 
-            <div className="col-md-6">
-                <h4>Order Summary</h4>
-                <hr />
-                <p>Products {products.length}</p>
-                <hr />
-                {showProductSummary()}
-                <hr />
-                <p>Cart Total: {total}</p>
 
-                {totalAfterDiscount > 0 && (
-                    <p className="bg-success p-2">
-                        Discount Applied: Total Payable: ${totalAfterDiscount}
-                    </p>
-                )}
+                        <Row>
+                            <Col md="12">
+                                <h4 className="title">Checkout</h4>
+                            </Col>
 
-                <div className="row">
-                    <div className="col-md-6">
-                        {COD ? (
-                            <button
-                                className="btn btn-primary"
-                                disabled={!addressSaved || !products.length}
-                                onClick={createCashOrder}
-                            >
-                                Place Order
-                            </button>
-                        ) : (
-                            <button
-                                className="btn btn-primary"
-                                disabled={!addressSaved || !products.length}
-                                onClick={() => history.push("/payment")}
-                            >
-                                Place Order
-                            </button>
-                        )}
-                    </div>
 
-                    <div className="col-md-6">
-                        <button
-                            disabled={!products.length}
-                            onClick={emptyCart}
-                            className="btn btn-primary"
-                        >
-                            Empty Cart
-                        </button>
-                    </div>
+
+                            <div className="col-md-6">
+                                <h4>Delivery Address</h4>
+                                <br />
+                                <br />
+                                {showAddress()}
+                                <hr />
+                                <h4>Got Coupon?</h4>
+                                <br />
+                                {showApplyCoupon()}
+                                <br />
+                                {discountError && <p className="bg-danger p-2">{discountError}</p>}
+                            </div>
+
+                            <div className="col-md-6">
+                                <h4>Order Summary</h4>
+                                <hr />
+                                <p>Products {products.length}</p>
+                                <hr />
+                                {showProductSummary()}
+                                <hr />
+                                <p>Cart Total: {total}</p>
+
+                                {totalAfterDiscount > 0 && (
+                                    <p className="bg-success p-2">
+                                        Discount Applied: Total Payable: ${totalAfterDiscount}
+                                    </p>
+                                )}
+
+                                <div className="row">
+                                    <div className="col-md-6">
+                                        {COD ? (
+                                            <button
+                                                className="btn btn-dark"
+                                                disabled={!addressSaved || !products.length}
+                                                onClick={createCashOrder}
+                                            >
+                                                Place Order
+                                            </button>
+                                        ) : (
+                                            <button
+                                                className="btn btn-dark"
+                                                disabled={!addressSaved || !products.length}
+                                                onClick={() => history.push("/payment")}
+                                            >
+                                                Place Order
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    <div className="col-md-6">
+                                        <button
+                                            disabled={!products.length}
+                                            onClick={emptyCart}
+                                            className="btn btn-dark"
+                                        >
+                                            Empty Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </Row>
+
+
+
+                    </Container>
                 </div>
+
             </div>
-        </div>
+
+            <FooterBlack />
+        </>
     );
-};
+}
 
 export default Checkout;

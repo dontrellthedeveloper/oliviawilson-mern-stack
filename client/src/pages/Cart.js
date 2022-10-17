@@ -3,6 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
 import { userCart } from "../functions/user";
+import {
+    Button,
+    Container,
+    Row,
+    Col,
+    Table,
+} from "reactstrap";
+import FooterBlack from "components/Footers/FooterBlack.js";
+import WhiteNavbar2 from "../components/nav/WhiteNavbar";
+
+
 
 const Cart = ({ history }) => {
     const { cart, user } = useSelector((state) => ({ ...state }));
@@ -39,88 +50,141 @@ const Cart = ({ history }) => {
     };
 
     const showCartItems = () => (
-        <table className="table table-bordered">
-            <thead className="thead-light">
-            <tr>
-                <th scope="col">Image</th>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Color</th>
-                <th scope="col">Count</th>
-                <th scope="col">Shipping</th>
-                <th scope="col">Remove</th>
-            </tr>
+
+
+        <Table className="table-shopping" responsive>
+            <thead>
+                <tr>
+                    <th scope="col" className="text-center">Image</th>
+                    <th scope="col" className="text-center">Title</th>
+                    <th scope="col" className="text-center">Price</th>
+                    <th scope="col" className="text-center">Brand</th>
+                    <th scope="col" className="text-center">Color</th>
+                    <th scope="col" className="text-center">Count</th>
+                    <th scope="col">Shipping</th>
+                    <th scope="col">Remove</th>
+                </tr>
             </thead>
 
             {cart.map((p) => (
-                <ProductCardInCheckout key={p._id} p={p} />
+
+                    <ProductCardInCheckout getTotal={getTotal()} key={p._id} p={p} />
+
             ))}
-        </table>
+            <tbody>
+                <tr>
+                    <td colSpan="2" />
+                    <td />
+                    <td />
+                    <td />
+                    <td />
+                    <td className="td-total">Total</td>
+                    <td className="td-total">
+                        <small>$</small>
+                        {getTotal()}
+                    </td>
+                </tr>
+            </tbody>
+    </Table>
+
+
+
     );
+
+
+
+
+    document.documentElement.classList.remove("nav-open");
 
     return (
-        <div className="container-fluid pt-2">
-            <div className="row">
-                <div className="col-md-8">
-                    <h4>Cart / {cart.length} Product</h4>
+        <>
+            <WhiteNavbar2 />
+            <div className="main">
+                <div className="section section-gray" style={{marginTop: '40px'}}>
+                    <Container>
 
-                    {!cart.length ? (
-                        <p>
-                            No products in cart. <Link to="/shop">Continue Shopping.</Link>
-                        </p>
-                    ) : (
-                        showCartItems()
-                    )}
+                        <h3
+                            style={{textAlign: 'center', marginTop: '60px', textTransform: 'capitalize'}}
+                            className="section-title">
+                            Shopping Cart
+                        </h3>
+
+                        <Row>
+                            <Col md="12">
+                                <h4 className="title">{cart.length} Product</h4>
+                            </Col>
+
+
+                            <Col className="ml-auto mr-auto" md="9">
+
+                                {!cart.length ? (
+                                    <p>
+                                        No products in cart. <Link to="/shop">Continue Shopping.</Link>
+                                    </p>
+                                ) : (
+                                    <>
+                                        {showCartItems()}
+                                    </>
+
+                                )}
+
+
+                            </Col>
+
+                            <Col  md="3">
+                                <h4>Order Summary</h4>
+                                <hr />
+                                <p>Products</p>
+                                {cart.map((c, i) => (
+                                    <div key={i}>
+                                        <p>
+                                            {c.title} x {c.count} = ${c.price * c.count}
+                                        </p>
+                                    </div>
+                                ))}
+                                <hr />
+                                Total: <b>${getTotal()}</b>
+                                <hr />
+                                {user ? (
+                                    <>
+
+                                        <Button
+                                            onClick={saveOrderToDb}
+                                            disabled={!cart.length}
+                                            color="dark" size="md" type="button">
+                                            Proceed to Checkout <i className="fa fa-chevron-right" />
+                                        </Button>
+
+                                        <br />
+                                    </>
+                                ) : (
+
+                                    <Button
+                                    color="dark" size="md" type="button">
+                                    Proceed to Checkout <i className="fa fa-chevron-right" />
+                                        <Link
+                                        to={{
+                                        pathname: "/login",
+                                        state: { from: "cart" },
+                                        }}
+                                        >
+                                        Login to Checkout
+                                        </Link>
+
+                                    </Button>
+                                )}
+                            </Col>
+                        </Row>
+
+
+
+                    </Container>
                 </div>
-                <div className="col-md-4">
-                    <h4>Order Summary</h4>
-                    <hr />
-                    <p>Products</p>
-                    {cart.map((c, i) => (
-                        <div key={i}>
-                            <p>
-                                {c.title} x {c.count} = ${c.price * c.count}
-                            </p>
-                        </div>
-                    ))}
-                    <hr />
-                    Total: <b>${getTotal()}</b>
-                    <hr />
-                    {user ? (
-                        <>
-                            <button
-                                onClick={saveOrderToDb}
-                                className="btn btn-sm btn-primary mt-2"
-                                disabled={!cart.length}
-                            >
-                                Proceed to Checkout
-                            </button>
-                            <br />
-                            <button
-                                onClick={saveCashOrderToDb}
-                                className="btn btn-sm btn-warning mt-2"
-                                disabled={!cart.length}
-                            >
-                                Pay Cash on Delivery
-                            </button>
-                        </>
-                    ) : (
-                        <button className="btn btn-sm btn-primary mt-2">
-                            <Link
-                                to={{
-                                    pathname: "/login",
-                                    state: { from: "cart" },
-                                }}
-                            >
-                                Login to Checkout
-                            </Link>
-                        </button>
-                    )}
-                </div>
+
             </div>
-        </div>
+            <FooterBlack />
+        </>
     );
-};
+}
 
 export default Cart;

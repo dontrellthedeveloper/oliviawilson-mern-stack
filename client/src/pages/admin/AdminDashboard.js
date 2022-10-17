@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../components/nav/AdminNav";
 import { getOrders, changeStatus } from "../../functions/admin";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Orders from "../../components/order/Orders";
+import {
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../components/nav/WhiteNavbar";
+import AdminNav from "../../components/nav/AdminNav";
 
 const AdminDashboard = () => {
     const [orders, setOrders] = useState([]);
@@ -26,20 +33,45 @@ const AdminDashboard = () => {
         });
     };
 
+
+    document.documentElement.classList.remove("nav-open");
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Admin Dashboard</h3>
+                        <Row>
+                            <Col md="3">
+
+                                <AdminNav/>
+
+                                {/* end card */}
+                            </Col>
+
+
+                            <Col md="9">
+                                <h4 className="title" style={{marginBottom: '8px'}}>
+                                    <small>Orders</small>
+                                </h4>
+
+                                <Orders orders={orders} handleStatusChange={handleStatusChange} />
+
+
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
 
-                <div className="col-md-10">
-                    <h4>Admin Dashboard</h4>
-                    <Orders orders={orders} handleStatusChange={handleStatusChange} />
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default AdminDashboard;

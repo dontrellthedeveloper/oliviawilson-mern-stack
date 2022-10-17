@@ -1,4 +1,5 @@
 import React from "react";
+import {FormGroup, Input} from "reactstrap";
 
 const LocalSearch = ({ keyword, setKeyword }) => {
     const handleSearchChange = (e) => {
@@ -7,13 +8,17 @@ const LocalSearch = ({ keyword, setKeyword }) => {
     };
 
     return (
-        <input
-            type="search"
-            placeholder="Filter"
-            value={keyword}
-            onChange={handleSearchChange}
-            className="form-control mb-4"
-        />
+        <FormGroup>
+            <Input
+                // defaultValue=""
+                placeholder="Filter"
+                type="text"
+                value={keyword}
+                onChange={handleSearchChange}
+            />
+        </FormGroup>
+
+
     );
 };
 

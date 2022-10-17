@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
@@ -8,16 +7,24 @@ import {
     removeCategory,
 } from "../../../functions/category";
 import { Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
 import LocalSearch from "../../../components/forms/LocalSearch";
+import {
+    Button,
+    Container,
+    Row,
+    Col,
+    UncontrolledTooltip, Table,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
+import AdminNav from "../../../components/nav/AdminNav";
 
 
 
 const CategoryCreate = () => {
 
     const { user } = useSelector((state) => ({ ...state }));
-
     const [name, setName] = useState("");
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
@@ -86,53 +93,133 @@ const CategoryCreate = () => {
 
 
 
+    document.documentElement.classList.remove("nav-open");
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Categories</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+                            <Col md="7" style={{margin: '0 auto'}}>
+
+                                {loading ? (
+                                    <h4 className="title">
+                                        <small>Loading...</small>
+                                    </h4>
+                                ) : (
+                                <h4 className="title">
+                                    <small>Create Category</small>
+                                </h4>
+                                )}
+
+
+                                <CategoryForm
+                                    handleSubmit={handleSubmit}
+                                    name={name}
+                                    setName={setName}
+                                />
+
+
+
+                                <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+
+
+
+                                <Table responsive>
+                                    <thead>
+                                    <tr>
+                                        <th className='pl-3'>Categories</th>
+                                        <th className="text-center"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th className="text-right"></th>
+                                        <th className="text-right">Edit/Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+
+                                    {categories.filter(searched(keyword)).map((c) => (
+
+                                        <tr style={{backgroundColor: '#fff'}} key={c._id}>
+                                            <td className='pl-3 font-weight-normal'>{c.name}</td>
+                                            <td className="text-center"></td>
+
+                                            <td></td>
+
+                                            <td></td>
+                                            <td className="text-right"></td>
+                                            <td className="td-actions text-right">
+
+                                                <Link to={`/admin/category/${c.slug}`}>
+                                                    <Button
+                                                        className="btn-link mr-1"
+                                                        color="success"
+                                                        data-toggle="tooltip"
+                                                        id="tooltip278266693"
+                                                        size="sm"
+                                                        type="button"
+                                                        style={{marginBottom: '0'}}
+                                                    >
+                                                        <i className="fa fa-edit" />
+                                                    </Button>
+                                                </Link>
+                                                <UncontrolledTooltip
+                                                    delay={0}
+                                                    placement="top"
+                                                    target="tooltip278266693"
+                                                >
+                                                    Edit Profile
+                                                </UncontrolledTooltip>
+                                                <Button
+                                                    className="btn-link"
+                                                    color="danger"
+                                                    data-toggle="tooltip"
+                                                    id="tooltip16493734"
+                                                    size="sm"
+                                                    type="button"
+                                                    style={{marginBottom: '0'}}
+                                                    onClick={() => handleRemove(c.slug)}
+                                                >
+                                                    <i className="fa fa-times" />
+                                                </Button>
+                                                <UncontrolledTooltip
+                                                    delay={0}
+                                                    placement="top"
+                                                    target="tooltip16493734"
+                                                >
+                                                    Remove
+                                                </UncontrolledTooltip>
+                                            </td>
+                                        </tr>
+                                    ))}
+
+                                    </tbody>
+
+
+
+                                </Table>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
-                <div className="col">
-                    {loading ? (
-                        <h4 className="text-danger">Loading..</h4>
-                    ) : (
-                        <h4>Create category</h4>
-                    )}
-                    <CategoryForm
-                        handleSubmit={handleSubmit}
-                        name={name}
-                        setName={setName}
-                    />
 
-
-                    {/* step 2 and step 3 */}
-                    <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-
-
-
-
-                    <hr />
-                    {/* step 5 */}
-                    {categories.filter(searched(keyword)).map((c) => (
-                        <div className="alert alert-secondary" key={c._id}>
-                            {c.name}
-                            <span
-                                onClick={() => handleRemove(c.slug)}
-                                className="btn btn-sm float-right"
-                            >
-                                <DeleteOutlined className="text-danger" />
-                            </span>
-                            <Link to={`/admin/category/${c.slug}`}>
-                                <span className="btn btn-sm float-right">
-                                  <EditOutlined className="text-warning" />
-                                </span>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default CategoryCreate;

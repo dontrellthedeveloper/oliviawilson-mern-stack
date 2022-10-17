@@ -3,24 +3,13 @@ import { getProducts, getProductsCount } from "../../functions/product";
 import ProductCard from "../cards/ProductCard";
 import LoadingCard from "../cards/LoadingCard";
 import { Pagination } from "antd";
+import {Col} from "reactstrap";
 
 const NewArrivals = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [productsCount, setProductsCount] = useState(0);
     const [page, setPage] = useState(1);
-
-    useEffect(() => {
-        loadAllProducts();
-    }, [page]);
-
-    useEffect(() => {
-        getProductsCount().then((res) => {
-                console.log(res.data)
-                setProductsCount(res.data)
-            }
-        )
-    }, []);
 
     const loadAllProducts = () => {
         setLoading(true);
@@ -31,24 +20,39 @@ const NewArrivals = () => {
         });
     };
 
+    useEffect(() => {
+        loadAllProducts();
+
+    }, [page]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    useEffect(() => {
+        getProductsCount().then((res) => {
+                console.log(res.data)
+                setProductsCount(res.data)
+            }
+        )
+    }, []);
+
+
+
     return (
         <>
-            <div className="container">
+            <>
                 {loading ? (
                     <LoadingCard count={3} />
                 ) : (
-                    <div className="row">
+                    <>
                         {products.map((product) => (
-                            <div key={product._id} className="col-md-4">
-                                <ProductCard product={product} />
-                            </div>
+                                <Col md="4" key={product._id}>
+                                    <ProductCard product={product} />
+                                </Col>
                         ))}
-                    </div>
+                    </>
                 )}
-            </div>
+            </>
 
-            <div className="row">
-                <nav className="col-md-4 offset-md-4 text-center pt-5 p-3">
+            <div className="row" style={{margin: '20px auto'}}>
+                <nav className="col-md-4 offset-md-4 text-center pt-5 p-3" style={{display: 'contents'}}>
                     <Pagination
                         current={page}
                         total={Math.round((productsCount / 3) * 10)}

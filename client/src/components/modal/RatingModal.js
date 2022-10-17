@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import { Modal, Button } from "antd";
+import { Modal, Tooltip } from "antd";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { StarOutlined } from "@ant-design/icons";
 import { useHistory, useParams } from "react-router-dom";
+import {
+    Button,
+} from "reactstrap";
+
+
 
 const RatingModal = ({ children }) => {
+    const [modalTip, setModalTip] = useState("Leave Rating");
+    const [modalTip2, setModalTip2] = useState("Login to Leave Rating");
+
+
     const { user } = useSelector((state) => ({ ...state }));
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -25,10 +33,31 @@ const RatingModal = ({ children }) => {
 
     return (
         <>
-            <div onClick={handleModal}>
-                <StarOutlined className="text-danger" /> <br />{" "}
-                {user ? "Leave rating" : "Login to leave rating"}
-            </div>
+            {user ? (
+            <Tooltip title={modalTip}>
+            <Button
+                onClick={handleModal}
+                disabled={!user}
+                className="btn-just-icon btn-border mr-1 mb-3"
+                color="google"
+                // style={{border: 'none'}}
+            >
+                <i className="fa fa-star" aria-hidden="true"></i>
+            </Button>
+            </Tooltip>
+            ) : (
+                <Tooltip title={modalTip2}>
+                    <Button
+                        className="btn-just-icon btn-border mr-1 mb-3"
+                        color="google"
+                        // style={{border: 'none'}}
+                    >
+                        <i className="fa fa-star" aria-hidden="true"></i>
+                    </Button>
+                </Tooltip>
+            )}
+
+
             <Modal
                 title="Leave your rating"
                 centered

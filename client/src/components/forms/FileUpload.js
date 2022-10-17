@@ -102,9 +102,9 @@ const FileUpload = ({ values, setValues, setLoading }) => {
                         </Badge>
                     ))}
             </div>
-            <div className="row">
-                <label className="btn btn-primary btn-raised mt-3">
-                    Choose File
+            <div className="row justify-content-center">
+                <label className="btn-round mr-1 mb-3 btn btn-outline-default" style={{marginTop: '10px'}}>
+                    Choose Images
                     <input
                         type="file"
                         multiple

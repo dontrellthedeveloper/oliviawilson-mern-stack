@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Slider from "nouislider";
 import {
     getProductsByCount,
     fetchProductsByFilter,
@@ -6,18 +7,32 @@ import {
 import { getCategories } from "../functions/category";
 import { getSubs } from "../functions/sub";
 import { useSelector, useDispatch } from "react-redux";
-import ProductCard from "../components/cards/ProductCard";
-import { Menu, Slider, Checkbox, Radio } from "antd";
-import {
-    DollarOutlined,
-    DownSquareOutlined,
-    StarOutlined,
-} from "@ant-design/icons";
 import Star from "../components/forms/Star";
-
-const { SubMenu, ItemGroup } = Menu;
+import {
+    Card,
+    CardHeader,
+    CardBody,
+    Collapse,
+    Label,
+    FormGroup,
+    Input,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../components/nav/WhiteNavbar";
+import ProductCard from "../components/cards/ProductCard";
 
 const Shop = () => {
+    // states for collapses
+    const [priceRange, setPriceRange] = React.useState(true);
+    const [clothing, setClothing] = React.useState(true);
+    const [designer, setDesigner] = React.useState(true);
+    // const [color, setColor] = React.useState(true);
+
+
+    // states for filtering
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [price, setPrice] = useState([0, 0]);
@@ -111,18 +126,18 @@ const Shop = () => {
     // show categories in a list of checkbox
     const showCategories = () =>
         categories.map((c) => (
-            <div key={c._id}>
-                <Checkbox
-                    onChange={handleCheck}
-                    className="pb-2 pl-4 pr-4"
-                    value={c._id}
-                    name="category"
-                    checked={categoryIds.includes(c._id)}
-                >
-                    {c.name}
-                </Checkbox>
-                <br />
-            </div>
+            <FormGroup check key={c._id}>
+                <Label check>
+                    <Input
+                        defaultValue=""
+                        type="checkbox"
+                        onChange={handleCheck}
+                        value={c._id}
+                        checked={categoryIds.includes(c._id)}
+                    />
+                    {c.name} <span className="form-check-sign" />
+                </Label>
+            </FormGroup>
         ));
 
     // handle check for categories
@@ -215,16 +230,18 @@ const Shop = () => {
     // 7. show products based on brand name
     const showBrands = () =>
         brands.map((b) => (
-            <Radio
-                key={b}
-                value={b}
-                name={b}
-                checked={b === brand}
-                onChange={handleBrand}
-                className="pb-1 pl-4 pr-4"
-            >
-                {b}
-            </Radio>
+            <FormGroup check key={b}>
+                <Label check>
+                    <Input
+                        defaultValue=""
+                        type="checkbox"
+                        onChange={handleBrand}
+                        value={b}
+                        checked={b === brand}
+                    />
+                    {b} <span className="form-check-sign" />
+                </Label>
+            </FormGroup>
         ));
 
     const handleBrand = (e) => {
@@ -245,16 +262,18 @@ const Shop = () => {
     // 8. show products based on color
     const showColors = () =>
         colors.map((c) => (
-            <Radio
-                key={c}
-                value={c}
-                name={c}
-                checked={c === color}
-                onChange={handleColor}
-                className="pb-1 pl-4 pr-4"
-            >
-                {c}
-            </Radio>
+            <FormGroup check key={c}>
+                <Label check>
+                    <Input
+                        defaultValue=""
+                        type="checkbox"
+                        onChange={handleColor}
+                        value={c}
+                        checked={c === brand}
+                    />
+                    {c} <span className="form-check-sign" />
+                </Label>
+            </FormGroup>
         ));
 
     const handleColor = (e) => {
@@ -275,23 +294,34 @@ const Shop = () => {
     // 9. show products based on shipping yes/no
     const showShipping = () => (
         <>
-            <Checkbox
-                className="pb-2 pl-4 pr-4"
-                onChange={handleShippingchange}
-                value="Yes"
-                checked={shipping === "Yes"}
-            >
-                Yes
-            </Checkbox>
 
-            <Checkbox
-                className="pb-2 pl-4 pr-4"
-                onChange={handleShippingchange}
-                value="No"
-                checked={shipping === "No"}
-            >
-                No
-            </Checkbox>
+
+            <FormGroup check>
+                <Label check>
+                    <Input
+                        type="checkbox"
+                        onChange={handleShippingchange}
+                        value="Yes"
+                        checked={shipping === "Yes"}
+                    />
+                    Yes <span className="form-check-sign" />
+                </Label>
+            </FormGroup>
+
+
+
+            <FormGroup check>
+                <Label check>
+                    <Input
+                        type="checkbox"
+                        onChange={handleShippingchange}
+                        value="No"
+                        checked={shipping === "No"}
+                    />
+                    No <span className="form-check-sign" />
+                </Label>
+            </FormGroup>
+
         </>
     );
 
@@ -310,140 +340,262 @@ const Shop = () => {
         fetchProducts({ shipping: e.target.value });
     };
 
+
+
+    document.documentElement.classList.remove("nav-open");
+    React.useEffect(() => {
+        if (
+            !document.getElementById("sliderDouble").classList.contains("noUi-target")
+        ) {
+            Slider.create(document.getElementById("sliderDouble"), {
+                start: [20, 80],
+                connect: [false, true, false],
+                step: 1,
+                range: { min: 0, max: 100 },
+            });
+        }
+    });
+
+
+
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-3 pt-2">
-                    <h4>Search/Filter</h4>
-                    <hr />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
 
-                    <Menu
-                        defaultOpenKeys={["1", "2", "3", "4", "5", "6", "7"]}
-                        mode="inline"
-                    >
-                        {/* price */}
-                        <SubMenu
-                            key="1"
-                            title={
-                                <span className="h6">
-                  <DollarOutlined /> Price
-                </span>
-                            }
-                        >
-                            <div>
-                                <Slider
-                                    className="ml-4 mr-4"
-                                    tootipFormatter={(v) => `$${v}`}
-                                    range
-                                    value={price}
-                                    onChange={handleSlider}
-                                    max="4999"
-                                />
-                            </div>
-                        </SubMenu>
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
 
-                        {/* category */}
-                        <SubMenu
-                            key="2"
-                            title={
-                                <span className="h6">
-                  <DownSquareOutlined /> Categories
-                </span>
-                            }
-                        >
-                            <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
-                        </SubMenu>
+                        <h3
+                            style={{textAlign: 'center', marginTop: '60px', textTransform: 'capitalize'}}
+                            className="section-title">
+                            All Products
+                        </h3>
 
-                        {/* stars */}
-                        <SubMenu
-                            key="3"
-                            title={
-                                <span className="h6">
-                  <StarOutlined /> Rating
-                </span>
-                            }
-                        >
-                            <div style={{ maringTop: "-10px" }}>{showStars()}</div>
-                        </SubMenu>
+                        {/*<h3 className="section-title">Find what you need</h3>*/}
+                        <Row>
+                            <Col md="3">
+                                <Card className="card-refine" style={{marginTop: '70px'}}>
+                                    <div
+                                        aria-expanded={true}
+                                        aria-multiselectable={true}
+                                        className="panel-group"
+                                        id="accordion"
+                                    >
+                                        <CardHeader
+                                            className="card-collapse"
+                                            id="priceRanger"
+                                            role="tab"
+                                        >
+                                            <h5 className="mb-0 panel-title">
+                                                <a
+                                                    aria-expanded={priceRange}
+                                                    href="#pablo"
+                                                    // onClick={(e) => {
+                                                    //     e.preventDefault();
+                                                    //     setPriceRange(!priceRange);
+                                                    // }}
+                                                >
+                                                    Price Range <i className="nc-icon nc-minimal-down" />
+                                                </a>
+                                            </h5>
+                                        </CardHeader>
+                                        <Collapse isOpen={priceRange}>
+                                            <CardBody>
 
-                        {/* sub category */}
-                        <SubMenu
-                            key="4"
-                            title={
-                                <span className="h6">
-                  <DownSquareOutlined /> Sub Categories
-                </span>
-                            }
-                        >
-                            <div style={{ maringTop: "-10px" }} className="pl-4 pr-4">
-                                {showSubs()}
-                            </div>
-                        </SubMenu>
+                                                {/*<Slider*/}
+                                                {/*    className="ml-4 mr-4"*/}
+                                                {/*    tootipFormatter={(v) => `$${v}`}*/}
+                                                {/*    range*/}
+                                                {/*    value={price}*/}
+                                                {/*    onChange={handleSlider}*/}
+                                                {/*    max="4999"*/}
+                                                {/*/>*/}
 
-                        {/* brands */}
-                        <SubMenu
-                            key="5"
-                            title={
-                                <span className="h6">
-                  <DownSquareOutlined /> Brands
-                </span>
-                            }
-                        >
-                            <div style={{ maringTop: "-10px" }} className="pr-5">
-                                {showBrands()}
-                            </div>
-                        </SubMenu>
+                                                <div className="slider slider-info" id="sliderDouble" />
+                                            </CardBody>
+                                        </Collapse>
+                                        <CardHeader
+                                            className="card-collapse"
+                                            id="clothingGear"
+                                            role="tab"
+                                        >
+                                            <h5 className="mb-0 panel-title">
+                                                <a
+                                                    aria-expanded={clothing}
+                                                    href="#pablo"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        setClothing(!clothing);
+                                                    }}
+                                                >
+                                                    Categories <i className="nc-icon nc-minimal-down" />
+                                                </a>
+                                            </h5>
+                                        </CardHeader>
+                                        <Collapse isOpen={clothing}>
+                                            <CardBody>
 
-                        {/* colors */}
-                        <SubMenu
-                            key="6"
-                            title={
-                                <span className="h6">
-                  <DownSquareOutlined /> Colors
-                </span>
-                            }
-                        >
-                            <div style={{ maringTop: "-10px" }} className="pr-5">
-                                {showColors()}
-                            </div>
-                        </SubMenu>
+                                                <div style={{ maringTop: "-10px" }}>{showCategories()}</div>
 
-                        {/* shipping */}
-                        <SubMenu
-                            key="7"
-                            title={
-                                <span className="h6">
-                  <DownSquareOutlined /> Shipping
-                </span>
-                            }
-                        >
-                            <div style={{ maringTop: "-10px" }} className="pr-5">
-                                {showShipping()}
-                            </div>
-                        </SubMenu>
-                    </Menu>
+
+                                            </CardBody>
+                                        </Collapse>
+                                        <CardHeader
+                                            className="card-collapse"
+                                            id="designer"
+                                            role="tab"
+                                        >
+                                            <h5 className="mb-0 panel-title">
+                                                <a
+                                                    aria-expanded={designer}
+                                                    href="#pablo"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        setDesigner(!designer);
+                                                    }}
+                                                >
+                                                    Rating <i className="nc-icon nc-minimal-down" />
+                                                </a>
+                                            </h5>
+                                        </CardHeader>
+                                        <Collapse isOpen={designer}>
+                                            <CardBody>
+
+                                                <div style={{ maringTop: "-10px" }}>{showStars()}</div>
+
+
+                                            </CardBody>
+                                        </Collapse>
+                                        <CardHeader className="card-collapse" id="color" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <a
+                                                    aria-expanded={clothing}
+                                                    href="#pablo"
+                                                    // onClick={(e) => {
+                                                    //     e.preventDefault();
+                                                    //     setColor(!clothing);
+                                                    // }}
+                                                >
+                                                    Sub Categories <i className="nc-icon nc-minimal-down" />
+                                                </a>
+                                            </h5>
+                                        </CardHeader>
+                                        <Collapse isOpen={clothing}>
+                                            <CardBody>
+
+                                                {showSubs()}
+
+                                            </CardBody>
+                                        </Collapse>
+
+
+                                        <CardHeader className="card-collapse" id="color" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <a
+                                                    aria-expanded={clothing}
+                                                    href="#pablo"
+                                                    // onClick={(e) => {
+                                                    //     e.preventDefault();
+                                                    //     setColor(!color);
+                                                    // }}
+                                                >
+                                                    Brands <i className="nc-icon nc-minimal-down" />
+                                                </a>
+                                            </h5>
+                                        </CardHeader>
+                                        <Collapse isOpen={clothing}>
+                                            <CardBody>
+
+                                                <div style={{ maringTop: "-10px" }} className="pr-5">
+                                                    {showBrands()}
+                                                </div>
+
+
+                                            </CardBody>
+                                        </Collapse>
+                                        <CardHeader className="card-collapse" id="color" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <a
+                                                    aria-expanded={clothing}
+                                                    href="#pablo"
+                                                    // onClick={(e) => {
+                                                    //     e.preventDefault();
+                                                    //     setColor(!color);
+                                                    // }}
+                                                >
+                                                    Colors <i className="nc-icon nc-minimal-down" />
+                                                </a>
+                                            </h5>
+                                        </CardHeader>
+                                        <Collapse isOpen={clothing}>
+                                            <CardBody>
+
+                                                {showColors()}
+
+
+                                            </CardBody>
+                                        </Collapse>
+                                        <CardHeader className="card-collapse" id="color" role="tab">
+                                            <h5 className="mb-0 panel-title">
+                                                <a
+                                                    aria-expanded={clothing}
+                                                    href="#pablo"
+                                                    onClick={(e) => {
+                                                        e.preventDefault();
+                                                        setColor(!clothing);
+                                                    }}
+                                                >
+                                                    Shipping <i className="nc-icon nc-minimal-down" />
+                                                </a>
+                                            </h5>
+                                        </CardHeader>
+                                        <Collapse isOpen={clothing}>
+                                            <CardBody>
+
+                                                {showShipping()}
+
+
+                                            </CardBody>
+                                        </Collapse>
+                                    </div>
+                                </Card>
+                                {/* end card */}
+                            </Col>
+
+
+
+                            <Col md="9" >
+                                <div className="products" style={{marginTop: '70px'}}>
+
+                                    {products.length < 1 && <p>No products found</p>}
+
+                                    <Row>
+                                        {products.map((p) => (
+
+                                                <Col key={p._id} md="4" sm="4">
+                                                     <ProductCard product={p} />
+                                                </Col>
+
+                                        ))}
+
+
+                                    </Row>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
+                {/* section */}
 
-                <div className="col-md-9 pt-2">
-                    {loading ? (
-                        <h4 className="text-danger">Loading...</h4>
-                    ) : (
-                        <h4 className="text-danger">Products</h4>
-                    )}
-
-                    {products.length < 1 && <p>No products found</p>}
-
-                    <div className="row pb-5">
-                        {products.map((p) => (
-                            <div key={p._id} className="col-md-4 mt-3">
-                                <ProductCard product={p} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default Shop;

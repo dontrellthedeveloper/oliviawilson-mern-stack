@@ -1,43 +1,86 @@
 import React from "react";
-import Jumbotron from "../components/cards/Jumbotron";
+import {
+    Container,
+    Row,
+} from "reactstrap";
+import ColorNavbar from "components/nav/ColorNavbar.js";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import SectionHeader from "components/Headers/SectionHeader";
+import SectionPreFooterAreas from "../components/Footers/SectionPreFooterAreas";
 import NewArrivals from "../components/home/NewArrivals";
 import BestSellers from "../components/home/BestSellers";
 import CategoryList from "../components/category/CategoryList";
 import SubList from "../components/sub/SubList";
 
 
+
 const Home = () => {
+
+    document.documentElement.classList.remove("nav-open");
+
     return (
         <>
-            <div className="jumbotron text-danger h1 font-weight-bold text-center">
-                <Jumbotron text={["Latest Products", "New Arrivals", "Best Sellers"]} />
+            <ColorNavbar />
+            <SectionHeader />
+            <div className="wrapper">
+
+                <div className="section latest-offers">
+                    <Container>
+                        <h3
+                            style={{textAlign: 'center', marginBottom: '50px', textTransform: 'capitalize'}}
+                            className="section-title">
+                            New Arrivals
+                        </h3>
+                        <Row>
+                            <NewArrivals />
+                        </Row>
+                    </Container>
+                </div>
+
+
+                <div className="section latest-offers" style={{ backgroundColor: '#eeeeee'}}>
+                    <Container>
+                        <h3
+                            style={{textAlign: 'center', marginBottom: '50px', textTransform: 'capitalize'}}
+                            className="section-title">
+                            Best Sellers
+                        </h3>
+                        <Row>
+                            <BestSellers/>
+                        </Row>
+                    </Container>
+                </div>
+
+
+                <SectionPreFooterAreas />
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+
+                        <h3
+                            style={{textAlign: 'center', margin: '50px', textTransform: 'capitalize'}}
+                            className="section-title">
+                            Categories
+                        </h3>
+
+
+                        <CategoryList/>
+
+
+                        <h3
+                            style={{textAlign: 'center', margin: '50px', textTransform: 'capitalize'}}
+                            className="section-title">
+                            Sub Categories
+                        </h3>
+                        <SubList/>
+
+                    </Container>
+                </div>
+                <FooterEcommerce />
             </div>
-
-            <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-                New Arrivals
-            </h4>
-            <NewArrivals />
-
-            <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-                Best Sellers
-            </h4>
-            <BestSellers />
-
-            <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-                Categories
-            </h4>
-            <CategoryList />
-
-
-            <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-                Sub Categories
-            </h4>
-            <SubList />
-
-            <br />
-            <br />
         </>
     );
-};
+}
 
 export default Home;

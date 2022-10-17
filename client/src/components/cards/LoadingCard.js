@@ -1,5 +1,9 @@
 import React from "react";
-import { Card, Skeleton } from "antd";
+import { Skeleton } from "antd";
+import {
+    Card,
+} from "reactstrap";
+
 
 const LoadingCard = ({ count }) => {
     const cards = () => {

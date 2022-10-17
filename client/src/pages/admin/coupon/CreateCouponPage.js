@@ -8,8 +8,18 @@ import {
     createCoupon,
 } from "../../../functions/coupon";
 import "react-datepicker/dist/react-datepicker.css";
-import { DeleteOutlined } from "@ant-design/icons";
+import {
+    Button,
+    Container,
+    Row,
+    Col,
+    UncontrolledTooltip, Table,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
 import AdminNav from "../../../components/nav/AdminNav";
+
+
 
 const CreateCouponPage = () => {
     const [name, setName] = useState("");
@@ -56,92 +66,154 @@ const CreateCouponPage = () => {
         }
     };
 
+
+
+    document.documentElement.classList.remove("nav-open");
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Coupons</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+                            <Col md="7" style={{margin: '0 auto'}}>
+
+                                {loading ? (
+                                <h4 className="title">
+                                    <small>Loading...</small>
+                                </h4>
+                                ) : (
+                                <h4 className="title">
+                                    <small>Create Coupon</small>
+                                </h4>
+                                )}
+
+
+
+
+
+                                <form onSubmit={handleSubmit}>
+                                    <div className="form-group">
+                                        <label className="text-muted">Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            onChange={(e) => setName(e.target.value)}
+                                            value={name}
+                                            autoFocus
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="text-muted">Discount %</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            onChange={(e) => setDiscount(e.target.value)}
+                                            value={discount}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="text-muted">Expiry</label>
+                                        <br />
+                                        <DatePicker
+                                            className="form-control"
+                                            selected={expiry}
+                                            value={expiry}
+                                            onChange={(date) => setExpiry(date)}
+                                            required
+                                        />
+                                    </div>
+
+                                    {/*<button className="btn btn-outline-dark btn-dark btn-round mr-1 mb-3">Save</button>*/}
+                                    <div style={{textAlign: 'center'}}>
+
+                                    <Button
+                                        className="btn-round mr-1 mb-3"
+                                        color="default"
+                                        outline
+
+                                    >
+                                        Save
+                                    </Button>
+                                    </div>
+                                </form>
+
+
+
+                                <Table responsive>
+                                    <thead>
+                                    <tr>
+                                        <th className='pl-3'>{coupons.length} Coupons</th>
+                                        <th className="text-center"></th>
+                                        <th>Expiration</th>
+                                        {/*<th className="text-center"></th>*/}
+                                        <th className="text-center">Discount</th>
+                                        <th className="text-right"></th>
+                                        <th className="text-center">Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {coupons.map((c) => (
+
+                                    <tr style={{backgroundColor: '#fff'}} key={c._id}>
+
+                                        <td className='pl-3 font-weight-normal'>{c.name}</td>
+                                        <td></td>
+                                        <td className='font-weight-normal'>{new Date(c.expiry).toLocaleDateString()}</td>
+                                        <th className="text-center">{c.discount}%</th>
+                                        <td className="text-right"></td>
+                                        <td className="td-actions text-center">
+
+                                            <Button
+                                                className="btn-link"
+                                                color="danger"
+                                                data-toggle="tooltip"
+                                                id="tooltip16493734"
+                                                size="sm"
+                                                type="button"
+                                                style={{marginBottom: '0'}}
+                                                onClick={() => handleRemove(c._id)}
+                                            >
+                                                <i className="fa fa-times" />
+                                            </Button>
+                                            <UncontrolledTooltip
+                                                delay={0}
+                                                placement="top"
+                                                target="tooltip16493734"
+                                            >
+                                                Remove
+                                            </UncontrolledTooltip>
+                                        </td>
+                                    </tr>
+
+                                    ))}
+
+                                    </tbody>
+                                </Table>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
-                <div className="col-md-10">
-                    {loading ? (
-                        <h4 className="text-danger">Loading...</h4>
-                    ) : (
-                        <h4>Coupon</h4>
-                    )}
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label className="text-muted">Name</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                onChange={(e) => setName(e.target.value)}
-                                value={name}
-                                autoFocus
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label className="text-muted">Discount %</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                onChange={(e) => setDiscount(e.target.value)}
-                                value={discount}
-                                required
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label className="text-muted">Expiry</label>
-                            <br />
-                            <DatePicker
-                                className="form-control"
-                                selected={expiry}
-                                value={expiry}
-                                onChange={(date) => setExpiry(date)}
-                                required
-                            />
-                        </div>
-
-                        <button className="btn btn-outline-primary">Save</button>
-                    </form>
-
-                    <br />
-
-                    <h4>{coupons.length} Coupons</h4>
-
-                    <table className="table table-bordered">
-                        <thead className="thead-light">
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Expiry</th>
-                            <th scope="col">Discount</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-                        {coupons.map((c) => (
-                            <tr key={c._id}>
-                                <td>{c.name}</td>
-                                <td>{new Date(c.expiry).toLocaleDateString()}</td>
-                                <td>{c.discount}%</td>
-                                <td>
-                                    <DeleteOutlined
-                                        onClick={() => handleRemove(c._id)}
-                                        className="text-danger pointer"
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default CreateCouponPage;

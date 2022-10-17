@@ -1,11 +1,19 @@
-
 import React, { useEffect, useState } from "react";
-import AdminNav from "../../../components/nav/AdminNav";
 import { getProductsByCount } from "../../../functions/product";
 import AdminProductCard from "../../../components/cards/AdminProductCard";
 import { removeProduct } from "../../../functions/product";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import {
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
+import AdminNav from "../../../components/nav/AdminNav";
+
+
 
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
@@ -47,33 +55,56 @@ const AllProducts = () => {
         }
     };
 
+
+
+    document.documentElement.classList.remove("nav-open");
+
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">All Products</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+
+                            <Col md="9" style={{marginTop: '70px'}}>
+                                <div className="products">
+                                    <Row>
+
+                                        {products.map((product) => (
+
+                                        <Col md="4" sm="4" key={product._id}>
+                                            <AdminProductCard
+                                                product={product}
+                                                handleRemove={handleRemove}
+                                            />
+                                        </Col>
+
+                                        ))}
+
+
+                                    </Row>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
 
-                <div className="col">
-                    {loading ? (
-                        <h4 className="text-danger">Loading...</h4>
-                    ) : (
-                        <h4>All Products</h4>
-                    )}
-                    <div className="row">
-                        {products.map((product) => (
-                            <div key={product._id} className="col-md-4 pb-3">
-                                <AdminProductCard
-                                    product={product}
-                                    handleRemove={handleRemove}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default AllProducts;

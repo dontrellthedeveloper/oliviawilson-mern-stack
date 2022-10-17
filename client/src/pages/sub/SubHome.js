@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { getSub } from "../../functions/sub";
 import ProductCard from "../../components/cards/ProductCard";
+import {
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../components/nav/WhiteNavbar";
 
-const SubHome = ({ match }) => {
+
+const SubHome = ({match}) => {
     const [sub, setSub] = useState({});
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -19,31 +27,63 @@ const SubHome = ({ match }) => {
         });
     }, []);
 
-    return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col">
-                    {loading ? (
-                        <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-                            Loading...
-                        </h4>
-                    ) : (
-                        <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
-                            {products.length} Products in "{sub.name}" sub category
-                        </h4>
-                    )}
-                </div>
-            </div>
 
-            <div className="row">
-                {products.map((p) => (
-                    <div className="col" key={p._id}>
-                        <ProductCard product={p} />
-                    </div>
-                ))}
+    return (
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3
+                            style={{textAlign: 'center', marginTop: '40px', textTransform: 'capitalize'}}
+                            className="section-title">
+                            {sub.name}
+                        </h3>
+                        <Row>
+
+                            <Col md="12" >
+
+                                {loading ? (
+                                    <h4 className="title" style={{textAlign: 'center'}}>
+                                        <small> Loading...
+                                        </small>
+                                    </h4>
+                                ) : (
+                                    <h4 className="title" style={{textAlign: 'center'}}>
+                                        <small> {products.length} Products in "{sub.name}" sub category
+                                        </small>
+                                    </h4>
+                                )}
+
+                                <div className="products" style={{marginTop: '70px'}}>
+                                    <Row>
+                                        {products.map((p) => (
+
+                                            <Col key={p._id} md="3" sm="3">
+                                                <ProductCard product={p} />
+                                            </Col>
+
+                                        ))}
+
+
+                                    </Row>
+                                </div>
+                            </Col>
+
+
+
+                        </Row>
+                    </Container>
+                </div>
+                {/* section */}
+
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default SubHome;

@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategories } from "../../../functions/category";
-import { createSub, getSub, removeSub, getSubs } from "../../../functions/sub";
+import { createSub, removeSub, getSubs } from "../../../functions/sub";
 import { Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
 import LocalSearch from "../../../components/forms/LocalSearch";
+import {
+    Button,
+    FormGroup,
+    Container,
+    Row,
+    Col,
+    UncontrolledTooltip, Table,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
+import AdminNav from "../../../components/nav/AdminNav";
+
+
 
 const SubCreate = () => {
     const { user } = useSelector((state) => ({ ...state }));
@@ -72,66 +83,150 @@ const SubCreate = () => {
     // step 4
     const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
+
+
+    document.documentElement.classList.remove("nav-open");
+
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Sub Categories</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+                            <Col md="7" style={{margin: '0 auto'}}>
+
+                                {loading ? (
+                                    <h4 className="title">
+                                        <small>Loading..</small>
+                                    </h4>
+                                ) : (
+                                <h4 className="title">
+                                    <small>Create Sub Category</small>
+                                </h4>
+                                )}
+
+
+
+                                <FormGroup
+                                    style={{backgroundColor: '#fff', fontSize: '16px'}}
+                                >
+                                    <select
+                                        name="category"
+                                        className="form-control"
+                                        onChange={(e) => setCategory(e.target.value)}
+                                    >
+                                        <option>Please select</option>
+                                        {categories.length > 0 &&
+                                            categories.map((c) => (
+                                                <option key={c._id} value={c._id}>
+                                                    {c.name}
+                                                </option>
+                                            ))}
+                                    </select>
+                                </FormGroup>
+
+
+
+                                <CategoryForm
+                                    handleSubmit={handleSubmit}
+                                    name={name}
+                                    setName={setName}
+                                />
+
+                                {/* step 2 and step 3 */}
+                                <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+
+
+
+                                <Table responsive>
+                                    <thead>
+                                    <tr>
+                                        <th className='pl-3'>Sub Categories</th>
+                                        <th className="text-center"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th className="text-right"></th>
+                                        <th className="text-right">Edit/Delete</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {subs.filter(searched(keyword)).map((s) => (
+                                        <tr style={{backgroundColor: '#fff'}} key={s._id}>
+                                            <td className='pl-3 font-weight-normal'>{s.name}</td>
+                                            <td className="text-center"></td>
+
+                                            <td></td>
+
+                                            <td></td>
+                                            <td className="text-right"></td>
+                                            <td className="td-actions text-right">
+
+                                                <Link to={`/admin/sub/${s.slug}`}>
+                                                    <Button
+                                                        className="btn-link mr-1"
+                                                        color="success"
+                                                        data-toggle="tooltip"
+                                                        id="tooltip278266693"
+                                                        size="sm"
+                                                        type="button"
+                                                        style={{marginBottom: '0'}}
+                                                    >
+                                                        <i className="fa fa-edit" />
+                                                    </Button>
+                                                </Link>
+                                                <UncontrolledTooltip
+                                                    delay={0}
+                                                    placement="top"
+                                                    target="tooltip278266693"
+                                                >
+                                                    Edit Profile
+                                                </UncontrolledTooltip>
+                                                <Button
+                                                    className="btn-link"
+                                                    color="danger"
+                                                    data-toggle="tooltip"
+                                                    id="tooltip16493734"
+                                                    size="sm"
+                                                    type="button"
+                                                    style={{marginBottom: '0'}}
+                                                    onClick={() => handleRemove(s.slug)}
+                                                >
+                                                    <i className="fa fa-times" />
+                                                </Button>
+                                                <UncontrolledTooltip
+                                                    delay={0}
+                                                    placement="top"
+                                                    target="tooltip16493734"
+                                                >
+                                                    Remove
+                                                </UncontrolledTooltip>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </Table>
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
-                <div className="col">
-                    {loading ? (
-                        <h4 className="text-danger">Loading..</h4>
-                    ) : (
-                        <h4>Create sub category</h4>
-                    )}
 
-                    <div className="form-group">
-                        <label>Parent category</label>
-                        <select
-                            name="category"
-                            className="form-control"
-                            onChange={(e) => setCategory(e.target.value)}
-                        >
-                            <option>Please select</option>
-                            {categories.length > 0 &&
-                                categories.map((c) => (
-                                    <option key={c._id} value={c._id}>
-                                        {c.name}
-                                    </option>
-                                ))}
-                        </select>
-                    </div>
-
-                    <CategoryForm
-                        handleSubmit={handleSubmit}
-                        name={name}
-                        setName={setName}
-                    />
-
-                    {/* step 2 and step 3 */}
-                    <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-
-                    {/* step 5 */}
-                    {subs.filter(searched(keyword)).map((s) => (
-                        <div className="alert alert-secondary" key={s._id}>
-                            {s.name}
-                            <span
-                                onClick={() => handleRemove(s.slug)}
-                                className="btn btn-sm float-right"
-                            >
-                <DeleteOutlined className="text-danger" />
-              </span>
-                            <Link to={`/admin/sub/${s.slug}`}>
-                <span className="btn btn-sm float-right">
-                  <EditOutlined className="text-warning" />
-                </span>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default SubCreate;

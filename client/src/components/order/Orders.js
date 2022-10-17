@@ -4,7 +4,7 @@ import ShowPaymentInfo from "../cards/ShowPaymentInfo";
 
 const Orders = ({ orders, handleStatusChange }) => {
     const showOrderInTable = (order) => (
-        <table className="table table-bordered">
+        <table className="table table-bordered" style={{backgroundColor: '#fff'}}>
             <thead className="thead-light">
             <tr>
                 <th scope="col">Title</th>
@@ -43,11 +43,11 @@ const Orders = ({ orders, handleStatusChange }) => {
         <>
             {orders.map((order) => (
                 <div key={order._id} className="row pb-5">
-                    <div className="btn btn-block bg-light">
+                    <div className="btn btn-block bg-light" style={{border: '1px solid #e9ecef'}}>
                         <ShowPaymentInfo order={order} showStatus={false} />
 
                         <div className="row">
-                            <div className="col-md-4">Delivery Status</div>
+                            <div className="col-md-4" style={{color: 'black'}}>Delivery Status</div>
                             <div className="col-md-8">
                                 <select
                                     onChange={(e) =>

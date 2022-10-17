@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { createProduct } from "../../../functions/product";
 import ProductCreateForm from "../../../components/forms/ProductCreateForm";
 import { getCategories, getCategorySubs } from "../../../functions/category";
-import FileUpload from "../../../components/forms/FileUpload";
+import {
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
+import AdminNav from "../../../components/nav/AdminNav";
+
 
 
 const initialState = {
@@ -24,11 +31,15 @@ const initialState = {
     brand: "Apple",
 };
 
+
+
 const ProductCreate = () => {
     const [values, setValues] = useState(initialState);
     const [subOptions, setSubOptions] = useState([]);
     const [showSub, setShowSub] = useState(false);
     const [loading, setLoading] = useState(false);
+
+
 
     // redux
     const { user } = useSelector((state) => ({ ...state }));
@@ -60,7 +71,7 @@ const ProductCreate = () => {
         // console.log(e.target.name, " ----- ", e.target.value);
     };
 
-    const handleCatagoryChange = (e) => {
+    const handleCategoryChange = (e) => {
         e.preventDefault();
         console.log("CLICKED CATEGORY", e.target.value);
         setValues({ ...values, subs: [], category: e.target.value });
@@ -71,41 +82,61 @@ const ProductCreate = () => {
         setShowSub(true);
     };
 
+
+
+    document.documentElement.classList.remove("nav-open");
+
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Add Product</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+                            <Col md="7" sm="9" style={{margin: '0 auto', marginTop: '50px'}}>
+
+                                <div style={{textAlign: 'center'}}>
+
+
+                                    <div style={{display: 'none'}}>
+                                        {JSON.stringify(values.images)}
+                                    </div>
+
+
+                                </div>
+
+                                <ProductCreateForm
+                                    handleSubmit={handleSubmit}
+                                    handleChange={handleChange}
+                                    setValues={setValues}
+                                    values={values}
+                                    handleCategoryChange={handleCategoryChange}
+                                    subOptions={subOptions}
+                                    showSub={showSub}
+                                    setLoading={setLoading}
+                                />
+
+
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
 
-                <div className="col-md-10">
-                    <h4>Product create</h4>
-                    <hr />
-
-                    {JSON.stringify(values.images)}
-
-
-                    <div className="p-3">
-                        <FileUpload
-                            values={values}
-                            setValues={setValues}
-                            setLoading={setLoading}
-                        />
-                    </div>
-
-                    <ProductCreateForm
-                        handleSubmit={handleSubmit}
-                        handleChange={handleChange}
-                        setValues={setValues}
-                        values={values}
-                        handleCatagoryChange={handleCatagoryChange}
-                        subOptions={subOptions}
-                        showSub={showSub}
-                    />
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default ProductCreate;

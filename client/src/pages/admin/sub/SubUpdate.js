@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
-import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategories } from "../../../functions/category";
 import { updateSub, getSub } from "../../../functions/sub";
-import { Link } from "react-router-dom";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
-import LocalSearch from "../../../components/forms/LocalSearch";
+import {
+    FormGroup,
+    Container,
+    Row,
+    Col,
+} from "reactstrap";
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import WhiteNavbar2 from "../../../components/nav/WhiteNavbar";
+import AdminNav from "../../../components/nav/AdminNav";
+
+
 
 const SubUpdate = ({ match, history }) => {
     const { user } = useSelector((state) => ({ ...state }));
@@ -50,48 +57,74 @@ const SubUpdate = ({ match, history }) => {
             });
     };
 
+
+    document.documentElement.classList.remove("nav-open");
+
+
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <AdminNav />
+        <>
+
+            <WhiteNavbar2 />
+            <div className="wrapper">
+
+                {/* section */}
+                <div className="section section-gray">
+                    <Container>
+                        <h3 className="section-title">Sub Categories</h3>
+                        <Row>
+                            <Col md="3">
+                                <AdminNav/>
+                            </Col>
+
+
+                            <Col md="7" style={{margin: '0 auto'}}>
+                                {loading ? (
+                                <h4 className="title">
+                                    <small>Loading..</small>
+                                </h4>
+                                ) : (
+                                <h4 className="title">
+                                    <small>Update Sub Category</small>
+                                </h4>
+                                )}
+
+                                <FormGroup
+                                    style={{backgroundColor: '#fff', fontSize: '16px'}}
+                                >
+                                    <select
+                                        name="category"
+                                        className="form-control"
+                                        onChange={(e) => setParent(e.target.value)}
+                                    >
+                                        <option>Please select</option>
+                                        {categories.length > 0 &&
+                                            categories.map((c) => (
+                                                <option key={c._id} value={c._id} selected={c._id === parent}>
+                                                    {c.name}
+                                                </option>
+                                            ))}
+                                    </select>
+
+                                </FormGroup>
+
+
+                                <CategoryForm
+                                    handleSubmit={handleSubmit}
+                                    name={name}
+                                    setName={setName}
+                                />
+
+
+                            </Col>
+                        </Row>
+                    </Container>
                 </div>
-                <div className="col">
-                    {loading ? (
-                        <h4 className="text-danger">Loading..</h4>
-                    ) : (
-                        <h4>Update sub category</h4>
-                    )}
 
-                    <div className="form-group">
-                        <label>Parent category</label>
-                        <select
-                            name="category"
-                            className="form-control"
-                            onChange={(e) => setParent(e.target.value)}
-                        >
-                            <option>Please select</option>
-                            {categories.length > 0 &&
-                                categories.map((c) => (
-                                    <option key={c._id} value={c._id} selected={c._id === parent}>
-                                        {c.name}
-                                    </option>
-                                ))}
-                        </select>
-                    </div>
-
-                    <CategoryForm
-                        handleSubmit={handleSubmit}
-                        name={name}
-                        setName={setName}
-                    />
-
-
-                    <button className="btn btn-outline-primary"><Link to={`/admin/sub`} >Cancel</Link></button>
-                </div>
+                {/* section */}
+                <FooterEcommerce />
             </div>
-        </div>
+        </>
     );
-};
+}
 
 export default SubUpdate;
