@@ -158,8 +158,8 @@ const Cart = ({ history }) => {
 
                                     <Button
                                     color="dark" size="md" type="button">
-                                    Proceed to Checkout <i className="fa fa-chevron-right" />
                                         <Link
+                                            style={{color: '#a1a0a1', fontWeight: '600', textTransform: 'capitalize'}}
                                         to={{
                                         pathname: "/login",
                                         state: { from: "cart" },

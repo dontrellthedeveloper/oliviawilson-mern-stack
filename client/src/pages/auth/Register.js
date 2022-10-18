@@ -67,6 +67,22 @@ const Register = ({history}) => {
 
 
 
+    // video - header 4
+    const [videoPlaying, setVideoPlaying] = React.useState(false);
+    const videoRef = React.createRef();
+    const videoButtonClick = () => {
+        if (videoPlaying) {
+            setVideoPlaying(false);
+            videoRef.current.pause();
+        } else {
+            setVideoPlaying(true);
+            videoRef.current.play();
+        }
+    };
+
+
+
+
     document.documentElement.classList.remove("nav-open");
     React.useEffect(() => {
         document.body.classList.add("register-page");
@@ -83,16 +99,42 @@ const Register = ({history}) => {
     return (
         <>
             <ColorNavbar />
-            <div className="wrapper">
-                <div
-                    className="page-header"
-                    style={{
-                        backgroundImage:
-                            "url(" + require("assets/img/sections/bruno-abatti.jpg") + ")",
-                    }}
-                >
-                    <div className="filter" />
-                    <Container>
+            <div className="section section-header cd-section" style={{paddingTop: '0',paddingBottom: '0', minHeight: '100vh'}} id="headers">
+
+
+                {/* ********* HEADER 3 ********* */}
+                <div className="header-3">
+
+
+                    <div className="page-header header-video">
+                        <div className="filter filter-danger" />
+                        {/* We show the video image placeholder instead of the video for small devices */}
+                        <div
+                            className="video-image"
+                            style={{
+                                backgroundImage:
+                                    "url(" + require("assets/img/video-placeholder.png") + ")",
+                            }}
+                        />
+                        <video
+                            id="video-source"
+                            loop="loop"
+                            muted="muted"
+                            preload="auto"
+                            volume="0"
+                            ref={videoRef}
+                            autoPlay
+                        >
+                            <source
+                                src={require("assets/video/olivia-header.mp4")}
+                                type="video/mp4"
+                            ></source>
+                            Video not supported
+                        </video>
+                        <div className="filter" />
+                        <Container>
+
+
                         <Row>
 
                             <Col className="mr-auto" lg="12" md="12" sm="12" xs="12">
@@ -130,15 +172,25 @@ const Register = ({history}) => {
                                 </Card>
                             </Col>
                         </Row>
-                    </Container>
-                    <div className="demo-footer text-center">
-                        <h6 style={{color: '#fff'}}>
-                            © {new Date().getFullYear()}
-                            {" "}
-                            | Olivia Wilson Boutique, LLC <i className="fa fa-heart heart" />
-                        </h6>
+
+
+
+                        </Container>
+                        <div className="demo-footer text-center">
+
+                            <h6 style={{color: '#fff'}}>
+                                © {new Date().getFullYear()}
+                                {" "}
+                                | Olivia Wilson Boutique, LLC <i className="fa fa-heart heart" />
+                            </h6>
+                        </div>
                     </div>
                 </div>
+                {/* ********* END HEADER 3 ********* */}
+
+
+                {/*/!* ********* HEADER 4 (w/ video) ********* *!/*/}
+
             </div>
         </>
     );

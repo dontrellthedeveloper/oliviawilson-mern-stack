@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Slider from "nouislider";
+import { Menu, Slider, Checkbox, Radio } from "antd";
 import {
     getProductsByCount,
     fetchProductsByFilter,
@@ -49,6 +49,8 @@ const Shop = () => {
         "Microsoft",
         "Lenovo",
         "ASUS",
+        "Balmain",
+        "Olivia"
     ]);
     const [brand, setBrand] = useState("");
     const [colors, setColors] = useState([
@@ -344,18 +346,18 @@ const Shop = () => {
 
 
     document.documentElement.classList.remove("nav-open");
-    React.useEffect(() => {
-        if (
-            !document.getElementById("sliderDouble").classList.contains("noUi-target")
-        ) {
-            Slider.create(document.getElementById("sliderDouble"), {
-                start: [20, 80],
-                connect: [false, true, false],
-                step: 1,
-                range: { min: 0, max: 100 },
-            });
-        }
-    });
+    // React.useEffect(() => {
+    //     if (
+    //         !document.getElementById("sliderDouble").classList.contains("noUi-target")
+    //     ) {
+    //         Slider.create(document.getElementById("sliderDouble"), {
+    //             start: [20, 80],
+    //             connect: [false, true, false],
+    //             step: 1,
+    //             range: { min: 0, max: 100 },
+    //         });
+    //     }
+    // });
 
 
 
@@ -407,14 +409,14 @@ const Shop = () => {
                                         <Collapse isOpen={priceRange}>
                                             <CardBody>
 
-                                                {/*<Slider*/}
-                                                {/*    className="ml-4 mr-4"*/}
-                                                {/*    tootipFormatter={(v) => `$${v}`}*/}
-                                                {/*    range*/}
-                                                {/*    value={price}*/}
-                                                {/*    onChange={handleSlider}*/}
-                                                {/*    max="4999"*/}
-                                                {/*/>*/}
+                                                <Slider
+                                                    className="ml-4 mr-4"
+                                                    tootipFormatter={(v) => `$${v}`}
+                                                    range
+                                                    value={price}
+                                                    onChange={handleSlider}
+                                                    max="999"
+                                                />
 
                                                 <div className="slider slider-info" id="sliderDouble" />
                                             </CardBody>

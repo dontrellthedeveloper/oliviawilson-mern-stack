@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { auth, googleAuthProvider } from "../../firebase";
+import { auth, googleAuthProvider } from "../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { createOrUpdateUser } from "../../functions/auth";
+import { createOrUpdateUser } from "../functions/auth";
 import {
     Button,
     Card,
@@ -16,8 +16,18 @@ import {
 } from "reactstrap";
 import ColorNavbar from "components/nav/ColorNavbar.js";
 
+import FooterEcommerce from "components/Footers/FooterEcommerce.js";
+import SectionHeader from "components/Headers/SectionHeader";
+import SectionPreFooterAreas from "../components/Footers/SectionPreFooterAreas";
+import NewArrivals from "../components/home/NewArrivals";
+import BestSellers from "../components/home/BestSellers";
+import CategoryList from "../components/category/CategoryList";
+import SubList from "../components/sub/SubList";
+import FooterBlack from "../components/Footers/FooterBlack";
 
-const Login = ({ history }) => {
+
+
+const Home2 = ({history}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -111,48 +121,36 @@ const Login = ({ history }) => {
     };
 
     const loginForm = () => (
-    <Form className="register-form" onSubmit={handleSubmit}>
-        <Input
-            placeholder="Email..."
-            type="email"
-            className='login-placeholder'
-            style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px',}}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            autoFocus
-        />
-        <Input
-            placeholder="Password..."
-            type="password"
-            className='login-placeholder'
-            style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px'}}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-        />
-        <Button
-            block
-            className="btn-round"
-            style={{padding: '12px'}}
-            color="default"
-            onClick={handleSubmit}
-        >
-            Login
-        </Button>
-    </Form>
+        <Form className="register-form" onSubmit={handleSubmit}>
+            <Input
+                placeholder="Email..."
+                type="email"
+                className='login-placeholder'
+                style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px',}}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                autoFocus
+            />
+            <Input
+                placeholder="Password..."
+                type="password"
+                className='login-placeholder'
+                style={{backgroundColor: 'hsla(0, 0%,100%,.25)',color: '#fff',borderRadius: '2rem', border: 'none', fontSize: '15px', padding: '25px'}}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+                block
+                className="btn-round"
+                style={{padding: '12px'}}
+                color="default"
+                onClick={handleSubmit}
+            >
+                Login
+            </Button>
+        </Form>
     );
 
-
-    document.documentElement.classList.remove("nav-open");
-    React.useEffect(() => {
-        document.body.classList.add("register-page");
-        document.body.classList.add("full-screen");
-        window.scrollTo(0, 0);
-        document.body.scrollTop = 0;
-        return function cleanup() {
-            document.body.classList.remove("register-page");
-            document.body.classList.remove("full-screen");
-        };
-    })
 
 
     // video - header 4
@@ -170,9 +168,22 @@ const Login = ({ history }) => {
 
 
 
+    document.documentElement.classList.remove("nav-open");
+    React.useEffect(() => {
+        document.body.classList.add("register-page");
+        document.body.classList.add("full-screen");
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        return function cleanup() {
+            document.body.classList.remove("register-page");
+            document.body.classList.remove("full-screen");
+        };
+    })
+
     return (
         <>
             <ColorNavbar />
+
             <div className="section section-header cd-section" style={{paddingTop: '0',paddingBottom: '0', minHeight: '100vh'}} id="headers">
 
 
@@ -207,6 +218,8 @@ const Login = ({ history }) => {
                         </video>
                         <div className="filter" />
                         <Container>
+
+
                             <Row>
 
                                 <Col className="mr-auto" lg="12" md="12" sm="12" xs="12">
@@ -271,6 +284,8 @@ const Login = ({ history }) => {
                                     </Card>
                                 </Col>
                             </Row>
+
+
                         </Container>
                         <div className="demo-footer text-center">
 
@@ -288,8 +303,12 @@ const Login = ({ history }) => {
                 {/*/!* ********* HEADER 4 (w/ video) ********* *!/*/}
 
             </div>
+
+
+
+
         </>
     );
 }
 
-export default Login;
+export default Home2;

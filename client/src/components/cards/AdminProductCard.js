@@ -5,11 +5,11 @@ import {Button, CardBody, CardTitle, Card} from "reactstrap";
 
 const AdminProductCard = ({ product, handleRemove }) => {
     // destructure
-    const { title, description, images, slug, } = product;
+    const { title, description, images, slug, price } = product;
 
     return (
 
-        <Card className="card-product card-plain">
+        <Card className="card-product card-plain" style={{textAlign: 'center'}}>
             <div className="card-image">
                 <div className='show-images_container'>
 
@@ -50,7 +50,7 @@ const AdminProductCard = ({ product, handleRemove }) => {
                         </p>
                     </div>
                     <div className="price">
-                        <h5>2.900 €</h5>
+                        <h5>$ {price}</h5>
                     </div>
                 </CardBody>
             </div>
