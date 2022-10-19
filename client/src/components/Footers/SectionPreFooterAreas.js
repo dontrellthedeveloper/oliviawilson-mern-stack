@@ -21,7 +21,7 @@ const SectionPreFooterAreas = () => {
               <Button
                 className="btn-neutral"
                 color="link"
-                href="#pablo"
+                href="#"
                 onClick={(e) => e.preventDefault()}
               >
                 <i className="fa fa-twitter mr-1" />
@@ -32,7 +32,7 @@ const SectionPreFooterAreas = () => {
               <Button
                 className="btn-neutral"
                 color="link"
-                href="#pablo"
+                href="#"
                 onClick={(e) => e.preventDefault()}
               >
                 <i className="fa fa-dribbble mr-1" />
@@ -43,7 +43,7 @@ const SectionPreFooterAreas = () => {
               <Button
                 className="btn-neutral"
                 color="link"
-                href="#pablo"
+                href="#"
                 onClick={(e) => e.preventDefault()}
               >
                 <i className="fa fa-youtube mr-1" />
@@ -54,7 +54,7 @@ const SectionPreFooterAreas = () => {
               <Button
                 className="btn-neutral"
                 color="link"
-                href="#pablo"
+                href="#"
                 onClick={(e) => e.preventDefault()}
               >
                 <i className="fa fa-google-plus mr-1" />

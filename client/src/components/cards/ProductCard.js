@@ -217,6 +217,7 @@ const ProductCard = ({ product }) => {
                             color="default"
                             outline
                             type="button"
+                            style={{fontSize: '11px'}}
                         >
                             {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
                         </Button>

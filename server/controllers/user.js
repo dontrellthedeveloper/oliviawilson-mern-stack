@@ -13,7 +13,7 @@ exports.userCart = async (req, res) => {
 
     const user = await User.findOne({ email: req.user.email }).exec();
 
-    // check if cart with logged in user id already exist
+    // check if cart with logged-in user id already exist
     let cartExistByThisUser = await Cart.findOne({ orderdBy: user._id }).exec();
 
     if (cartExistByThisUser) {

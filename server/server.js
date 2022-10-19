@@ -10,6 +10,7 @@ require("dotenv").config();
 const app = express();
 
 
+
 // db
 mongoose
     .connect(process.env.DATABASE, {
@@ -28,6 +29,10 @@ app.use(cors());
 
 // routes
 readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
+
+
+
+
 
 
 // home route

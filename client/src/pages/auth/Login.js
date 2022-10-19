@@ -198,6 +198,8 @@ const Login = ({ history }) => {
                             volume="0"
                             ref={videoRef}
                             autoPlay
+                            style={{width: 'auto'}}
+                            playsInline
                         >
                             <source
                                 src={require("assets/video/olivia-header.mp4")}

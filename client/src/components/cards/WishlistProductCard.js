@@ -168,7 +168,7 @@ const WishlistProductCard = ({ product }) => {
                                 color="default"
                                 outline
                                 type="button"
-                                style={{fontSize: '9px'}}
+                                style={{fontSize: '8px'}}
                             >
                                 {product.quantity < 1 ? "Out of stock" : "Add to Cart"}
                             </Button>
