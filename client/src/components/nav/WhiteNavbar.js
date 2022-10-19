@@ -70,7 +70,9 @@ const WhiteNavbar = () => {
                 <Container>
                     <div className="navbar-translate">
                         <Link to='/'>
-                            <img src={require("assets/img/ecommerce/olivia-wilson-logo-light2.png")} width='100px' alt=""/>
+                            <img
+                                className='homepage_nav-img'
+                                src={require("assets/img/ecommerce/olivia-wilson-logo-light2.png")} width='100px' alt=""/>
                         </Link>
 
 
@@ -104,7 +106,9 @@ const WhiteNavbar = () => {
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle className="mr-2" color="default" nav to="/cart" tag={Link}>
                                     <Badge count={cart.length} offset={[9, 0]}>
-                                        <span style={{color: '#66615B'}}>Cart</span>
+                                        <span style={{color: '#66615B'}}
+                                              className='navbar__cart-mobile'
+                                        >Cart</span>
                                     </Badge>
                                 </DropdownToggle>
                             </UncontrolledDropdown>

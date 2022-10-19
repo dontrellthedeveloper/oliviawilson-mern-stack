@@ -87,13 +87,13 @@ const Product = ({ match }) => {
         <>
             <WhiteNavbar2 />
             <div className="main">
-                <div className="section" style={{marginTop: '70px', background: '#eeeeee',minHeight: '100vh'}} >
+                <div  style={{paddingTop: '140px', background: '#eeeeee',minHeight: '100vh'}} className="section product-page__section">
                     <Container>
 
                         <Row className="title-row">
 
                             <Col className="ml-auto" md="6">
-                                <div className="pull-right">
+                                <div className="pull-right product-page__header">
 
                                     {category && subs && (
                                         <span className="text-muted">

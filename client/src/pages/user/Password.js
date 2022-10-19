@@ -41,7 +41,9 @@ const Password = () => {
 
     const passwordUpdateForm = () => (
 
-        <form onSubmit={handleSubmit}>
+        <form
+            className='admin-nav__mobile-form'
+            onSubmit={handleSubmit}>
             <FormGroup>
                 <Input
                     type="password"

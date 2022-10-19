@@ -106,7 +106,9 @@ const CreateCouponPage = () => {
 
 
 
-                                <form onSubmit={handleSubmit}>
+                                <form
+                                    className='admin-nav__mobile-form'
+                                    onSubmit={handleSubmit}>
                                     <div className="form-group">
                                         <label className="text-muted">Name</label>
                                         <input

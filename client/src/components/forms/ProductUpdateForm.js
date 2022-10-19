@@ -37,7 +37,9 @@ const ProductUpdateForm = ({
 
 
     return (
-    <form onSubmit={handleSubmit}>
+    <form
+        className='admin-nav__mobile-form'
+        onSubmit={handleSubmit}>
         <FormGroup>
             <h6>
                 Title <span className="icon-danger">*</span>

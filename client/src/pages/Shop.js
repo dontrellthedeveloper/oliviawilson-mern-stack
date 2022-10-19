@@ -380,7 +380,7 @@ const Shop = () => {
 
                         {/*<h3 className="section-title">Find what you need</h3>*/}
                         <Row>
-                            <Col md="3">
+                            <Col md="3" className='shop-nav__mobile'>
                                 <Card className="card-refine" style={{marginTop: '70px'}}>
                                     <div
                                         aria-expanded={true}

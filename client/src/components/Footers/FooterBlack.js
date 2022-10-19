@@ -22,18 +22,24 @@ const FooterBlack = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to='/shop'>
+                  <Link
+                      className='footer-black__nav-links'
+                      to='/shop'>
                     Shop
                   </Link>
                 </li>
                 <li>
-                  <Link to='/cart'>
+                  <Link
+                      className='footer-black__nav-links'
+                      to='/cart'>
                     Cart
                   </Link>
                 </li>
                 {!user && (
                 <li>
-                  <Link to='/login'>
+                  <Link
+                      className='footer-black__nav-links'
+                      to='/login'>
                     Login
                   </Link>
                 </li>
@@ -41,7 +47,9 @@ const FooterBlack = () => {
 
                 {!user && (
                     <li>
-                      <Link to='/register'>
+                      <Link
+                          className='footer-black__nav-links'
+                          to='/register'>
                         Sign Up
                       </Link>
                     </li>
@@ -49,7 +57,9 @@ const FooterBlack = () => {
 
                 {user && user.role === "subscriber" && (
                     <li>
-                      <Link to='/user/history'>
+                      <Link
+                          className='footer-black__nav-links'
+                          to='/user/history'>
                         {user.email && user.email.split("@")[0]}
                       </Link>
                     </li>
@@ -58,7 +68,9 @@ const FooterBlack = () => {
 
                 {user && user.role === "admin" && (
                     <li>
-                      <Link to='/user/wishlist'>
+                      <Link
+                          className='footer-black__nav-links'
+                          to='/user/wishlist'>
                         {user.email && user.email.split("@")[0]}
                       </Link>
                     </li>

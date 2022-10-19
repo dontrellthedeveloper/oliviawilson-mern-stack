@@ -5,7 +5,9 @@ import {Button, FormGroup, Input} from "reactstrap";
 const CategoryForm = ({ handleSubmit, name, setName }) => (
 
 
-    <form onSubmit={handleSubmit}>
+    <form
+        className='admin-nav__mobile-form'
+        onSubmit={handleSubmit}>
 
         <FormGroup>
             <Input

@@ -76,7 +76,7 @@ const AllProducts = () => {
                             All Products
                         </h3>
                         <Row>
-                            <Col md="3">
+                            <Col md="3" >
                                 <AdminNav/>
                             </Col>
 

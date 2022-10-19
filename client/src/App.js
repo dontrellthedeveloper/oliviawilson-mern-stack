@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 import Home from "./pages/Home";
-import Home2 from "./pages/Home2";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import RegisterComplete from "./pages/auth/RegisterComplete";
@@ -39,6 +38,7 @@ import "assets/scss/paper-kit.scss";
 import "assets/demo/demo.css";
 import "assets/demo/react-demo.css";
 import './App.css';
+import './responsive.css';
 
 
 import {auth} from './firebase';
@@ -88,7 +88,6 @@ const App = () => {
             <ToastContainer />
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/home" component={Home2} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/register/complete" component={RegisterComplete} />

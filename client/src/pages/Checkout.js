@@ -104,7 +104,7 @@ const Checkout = ({ history }) => {
 
     const showAddress = () => (
         <>
-            <ReactQuill theme="snow" value={address} onChange={setAddress} />
+            <ReactQuill theme="snow" value={address} onChange={setAddress} style={{background: '#fff'}} />
             <button className="btn btn-dark mt-2" onClick={saveAddressToDb}>
                 Save
             </button>
@@ -180,7 +180,7 @@ const Checkout = ({ history }) => {
             <WhiteNavbar2 />
             {/*<ProductPageHeader />*/}
             <div className="main">
-                <div className="section section-gray" style={{minHeight: '100vh', marginTop: '40px'}}>
+                <div className="section section-gray checkout-page__mobile" style={{minHeight: '100vh', marginTop: '40px'}}>
                     <Container>
 
 
@@ -211,7 +211,7 @@ const Checkout = ({ history }) => {
                                 <hr />
                                 {showProductSummary()}
                                 <hr />
-                                <p>Cart Total: {total}</p>
+                                <p style={{fontWeight: '600'}}>Cart Total: {total}</p>
 
                                 {totalAfterDiscount > 0 && (
                                     <p className="bg-success p-2">
@@ -232,6 +232,7 @@ const Checkout = ({ history }) => {
                                         ) : (
                                             <button
                                                 className="btn btn-dark"
+                                                style={{margin: '10px'}}
                                                 disabled={!addressSaved || !products.length}
                                                 onClick={() => history.push("/payment")}
                                             >

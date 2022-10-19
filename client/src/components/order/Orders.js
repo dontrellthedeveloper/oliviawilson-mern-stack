@@ -7,26 +7,26 @@ const Orders = ({ orders, handleStatusChange }) => {
         <table className="table table-bordered" style={{backgroundColor: '#fff'}}>
             <thead className="thead-light">
             <tr>
-                <th scope="col">Title</th>
-                <th scope="col">Price</th>
-                <th scope="col">Brand</th>
-                <th scope="col">Color</th>
-                <th scope="col">Count</th>
-                <th scope="col">Shipping</th>
+                <th scope="col" className='admin-nav__orders-font-h'>Title</th>
+                <th scope="col" className='admin-nav__orders-font-h'>Price</th>
+                <th scope="col" className='admin-nav__orders-font-h'>Brand</th>
+                <th scope="col" className='admin-nav__orders-font-h'>Color</th>
+                <th scope="col" className='admin-nav__orders-font-h'>Count</th>
+                <th scope="col" className='admin-nav__orders-font-h'>Shipping</th>
             </tr>
             </thead>
 
             <tbody>
             {order.products.map((p, i) => (
                 <tr key={i}>
-                    <td>
+                    <td className='admin-nav__orders-font-h'>
                         <b>{p.product.title}</b>
                     </td>
-                    <td>{p.product.price}</td>
-                    <td>{p.product.brand}</td>
-                    <td>{p.color}</td>
-                    <td>{p.count}</td>
-                    <td>
+                    <td className='admin-nav__orders-font-h'>{p.product.price}</td>
+                    <td className='admin-nav__orders-font-h'>{p.product.brand}</td>
+                    <td className='admin-nav__orders-font-h'>{p.color}</td>
+                    <td className='admin-nav__orders-font-h'>{p.count}</td>
+                    <td className='admin-nav__orders-font-h'>
                         {p.product.shipping === "Yes" ? (
                             <CheckCircleOutlined style={{ color: "green" }} />
                         ) : (
@@ -42,7 +42,7 @@ const Orders = ({ orders, handleStatusChange }) => {
     return (
         <>
             {orders.map((order) => (
-                <div key={order._id} className="row pb-5">
+                <div key={order._id} className="row pb-5 admin-nav__orders-table">
                     <div className="btn btn-block bg-light" style={{border: '1px solid #e9ecef'}}>
                         <ShowPaymentInfo order={order} showStatus={false} />
 

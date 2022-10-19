@@ -1,8 +1,6 @@
 import React from "react";
 import {
-
   Container,
-
 } from "reactstrap";
 
 
@@ -64,7 +62,9 @@ const SectionHeader = () => {
 
 
 
-                  <img src={require("assets/img/ecommerce/olivia-wilson-logo-light.png")}  alt=""/>
+                  <img
+                      className='homepage_header-img'
+                      src={require("assets/img/ecommerce/olivia-wilson-logo-light.png")}  alt=""/>
 
 
               </Container>
