@@ -276,28 +276,28 @@ Project Link: [https://github.com/dontrellthedeveloper/oliviawilson-mern-stack](
 [Next-url]: https://nextjs.org/
 
 [Node.js]: https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
-[Node-url]: https://nextjs.org/
+[Node-url]: https://nodejs.org/
 
 [Redux.js]: https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white
-[Redux-url]: https://nextjs.org/
+[Redux-url]: https://redux.js.org/
 
 [Firebase]: https://img.shields.io/badge/firebase-666666?style=for-the-badge&logo=firebase&logoColor=FFCA28
-[Firebase-url]: https://nextjs.org/
+[Firebase-url]: https://firebase.google.com/
 
 [MongoDB]: https://img.shields.io/badge/Mongo%20DB-333333?style=for-the-badge&logo=mongodb&logoColor=47A248
-[MongoDB-url]: https://nextjs.org/
+[MongoDB-url]: https://www.mongodb.com/
 
 [Nginx]: https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white
-[Nginx-url]: https://nextjs.org/
+[Nginx-url]: https://www.nginx.com/
 
 [DigitalOcean]: https://img.shields.io/badge/DigitalOcean-0080FF?style=for-the-badge&logo=digitalocean&logoColor=white
-[DigitalOcean-url]: https://nextjs.org/
+[DigitalOcean-url]: https://www.digitalocean.com/
 
 [Stripe]: https://img.shields.io/badge/stripe-ffffff?style=for-the-badge&logo=stripe&logoColor=008CDD
-[Stripe-url]: https://nextjs.org/
+[Stripe-url]: https://stripe.com/
 
 [AntDesign]: https://img.shields.io/badge/AntDesign-0170FE?style=for-the-badge&logo=ant-design&logoColor=white
-[AntDesign-url]: https://nextjs.org/
+[AntDesign-url]: https://ant.design/
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
