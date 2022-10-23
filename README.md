@@ -42,7 +42,7 @@
     <a href="https://github.com/dontrellthedeveloper/oliviawilson-mern-stack"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/dontrellthedeveloper/oliviawilson-mern-stack">View Demo</a>
+    <a href="https://oliviawilson.dontrelldev.com">View Demo</a>
     ·
     <a href="https://github.com/dontrellthedeveloper/oliviawilson-mern-stack/issues">Report Bug</a>
     ·
@@ -62,19 +62,24 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-<!--
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#getting-started">Getting Started - Client (React.js)</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
--->
+    <li>
+      <a href="#getting-started">Getting Started - Server (Express.js)</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
     <li><a href="#usage">Usage</a></li>
 <!--
     <li><a href="#roadmap">Roadmap</a></li>
+-->
     <li><a href="#contributing">Contributing</a></li>
+<!--
     <li><a href="#license">License</a></li>
 -->
     <li><a href="#contact">Contact</a></li>
@@ -89,7 +94,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://oliviawilson.dontrelldev.com)
 
 <!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `dontrellthedeveloper`, `oliviawilson-mern-stack`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `Olivia Wilson Boutique`, `project_description` -->
 
@@ -104,10 +109,10 @@
 * [![Redux][Redux.js]][Redux-url]
 * [![Firebase][Firebase]][Firebase-url]
 * [![MongoDB][MongoDB]][MongoDB-url]
-* [![Nginx][Nginx]][Nginx-url]
-* [![DigitalOcean][DigitalOcean]][DigitalOcean-url]
+* [![Cloudinary][Cloudinary]][Cloudinary-url]
 * [![Stripe][Stripe]][Stripe-url]
-
+* [![DigitalOcean][DigitalOcean]][DigitalOcean-url]
+* [![Nginx][Nginx]][Nginx-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 * [![AntDesign][AntDesign]][AntDesign-url]
 
@@ -118,12 +123,14 @@
 
 <!-- GETTING STARTED -->
 
+
+## Client (React.js) - Getting Started
+
+
+To get a local copy of your client up and running follow the steps below.
+
+
 <!--
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
@@ -132,25 +139,90 @@ This is an example of how to list things you need to use the software and how to
   npm install --legacy-peer-deps
   ```
 
+-->
+
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Create a Firebase project and initialize firebase configuration.
+2. Create a stripe developer account and generate a private key. 
+3. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/dontrellthedeveloper/oliviawilson-mern-stack.git
    ```
-3. Install NPM packages
+4. Go to the client folder
    ```sh
-   npm install
+   cd client
+   ```   
+
+5. Install NPM packages
+   ```sh
+   npm install --legacy-peer-deps
    ```
-4. Enter your API in `config.js`
+6. Enter values in `.env` file
    ```js
-   const API_KEY = 'ENTER YOUR API';
+   REACT_APP_REGISTER_URL='http://localhost:3000/register/complete'
+   REACT_APP_FORGOT_PASSWORD_REDIRECT='http://localhost:3000/login'
+   REACT_APP_API='http://localhost:9000/api'
+   FIREBASE_API_KEY='{put your Firebase API key here}'
+   FIREBASE_APP_ID='{put your Firebase app ID here}'
+   REACT_APP_STRIPE_KEY='{put your Stripe key here}'
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
+## Server (Express.js) - Getting Started
+
+To get a local copy of your server up and running follow the steps below
+
+<!--
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+  ```sh
+  npm install --legacy-peer-deps
+  ```
+
 -->
+
+### Installation
+
+1. Create a mongoDB atlas cluster, or add a local mongoDB database.
+2. In your Firebase project, generate an administrator SDK in service accounts.
+3. Create a Cloudinary account and generate an API key and secret.
+4. In your Stripe developer account, generate a secret key.
+5. Clone the repo
+   ```sh
+   git clone https://github.com/dontrellthedeveloper/oliviawilson-mern-stack.git
+   ```
+6. Go to the server folder
+   ```sh
+   cd server
+   ```   
+
+7. Install NPM packages
+   ```sh
+   npm install
+   ```
+8. Enter values in `.env` file
+   ```js
+   DATABASE='{put your MongoDB connection string here}'
+   PORT=9000
+   CLOUDINARY_CLOUD_NAME='{put your Cloudinary name here}'
+   CLOUDINARY_API_KEY='{put your Cloudinary API key here}'
+   CLOUDINARY_API_SECRET='{put your Cloudinary secret here}'
+   STRIPE_SECRET='{put your Stripe secret key here}'
+
+   ```
+
+
+
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -158,18 +230,18 @@ This is an example of how to list things you need to use the software and how to
 Please sign up for an account to gain access to the user dashboard. The user dashboard gives you access to your purchase history, wishlist, and password change. 
 
 
-[![Product Name Screen Shot][product-screenshot3]](https://example.com)
+[![Product Name Screen Shot][product-screenshot3]](https://oliviawilson.dontrelldev.com)
 
 
 Administrators are granted additional access to the application. They are granted the ability to add categories, sub categories, products, and coupons. The administrator can also process orders from the admin dashboard. 
 
 
-[![Product Name Screen Shot][product-screenshot2]](https://example.com)
+[![Product Name Screen Shot][product-screenshot2]](https://oliviawilson.dontrelldev.com)
 
-<!--
-_For more examples, please refer to the [Documentation](https://example.com)_
 
--->
+_For more examples, please refer to the [Dashboard](https://oliviawilson.dontrelldev.com/user/history)_
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -199,7 +271,7 @@ See the [open issues](https://github.com/github_username/repo_name/issues) for a
 <!-- CONTRIBUTING -->
 
 
-<!--
+
 
 ## Contributing
 
@@ -216,7 +288,7 @@ Don't forget to give the project a star! Thanks again!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
--->
+
 
 
 
@@ -298,6 +370,9 @@ Project Link: [https://github.com/dontrellthedeveloper/oliviawilson-mern-stack](
 
 [AntDesign]: https://img.shields.io/badge/AntDesign-0170FE?style=for-the-badge&logo=ant-design&logoColor=white
 [AntDesign-url]: https://ant.design/
+
+[Cloudinary]: https://img.shields.io/badge/Cloudinary-a1a0a1.svg?style=for-the-badge&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAA21BMVEVHcEz0tS8OL1oOL1oAcboOL1oAcboKL2QJRYIOL1r0shsAcboOL1oGKVoAcboAcboEcbgAcbsHUYwKLFsBcroMLVrbgSbbgibzsyIAcbsAcboAcbwOL1oOL1oAcLwEcbj2rhsOL1oOL1rolCHy2GYAcboAcbsAcboAcboILFsAcLrggiPcgiYKLVvzsyDrnCD64GXqrBzy2WXysSL832X0shsAcbqffU4AcboAcbr9hQ/uph70shvagify2GXbgib0shvy2GXy2GXy2Wfy2WcUebPyAAHbgiby2GXUbCP0AAAARnRSTlMABHRvxwW/Cwdp/TFlGSR7X1IBEkQlvrddb40XQV4RWQ+GfiSroJU70jBjb81SZxYZLNVWJOOtHrFNDEW8n27ut7bux4Rvn2ei3QAAAO1JREFUeNpiIBkAGp0GNAdiKJyMHbcds7bW9v0vVPPjxnnvl+e3AhxelShWmj660fhlkSicAmD0FPsE81CH7J+oSQ/FttIit/uP1wnau5d+58P+oA+zbCOAAyXdFm0tfKj9Dh6f3qZwAsC9Fu6KCaz/1kaWNfqavcBE25olWrotNiyrMft7h7bi7fPgfXH++VdxDe09efr8Wp8vl43qo/ruGduSqgMwLsusnI4niwXcwYzYiYWr66w73Fwuc5muAiG5cmEWw1zKC8mUcjk2GdAdxzEdU5ZN2YxMWYoieaepqvp2GoZq6IbaFeD/Yw281BWp+nFYjQAAAABJRU5ErkJggg==
+[Cloudinary-url]: https://ant.design/
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
