@@ -37,7 +37,7 @@
 <h3 align="center">Olivia Wilson Boutique - MERN Ecommerce Store</h3>
 
   <p align="center">
-    Olivia Wilson is a Full Stack E-Commerce Store. This stack includes - MongoDB, Express, React, Node, Firebase, Nginx, and Stripe.
+    Olivia Wilson is a Full Stack E-Commerce Store. This stack includes - React, Node.js, Redux, Firebase, Bootstrap, Ant Design, MongoDB, Cloudinary, Stripe, Netlify, Digital Ocean, and Nginx.
     <br />
     <a href="https://github.com/dontrellthedeveloper/oliviawilson-mern-stack"><strong>Explore the docs »</strong></a>
     <br />
@@ -108,13 +108,15 @@
 * [![Node][Node.js]][Node-url]
 * [![Redux][Redux.js]][Redux-url]
 * [![Firebase][Firebase]][Firebase-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![AntDesign][AntDesign]][AntDesign-url]
 * [![MongoDB][MongoDB]][MongoDB-url]
 * [![Cloudinary][Cloudinary]][Cloudinary-url]
 * [![Stripe][Stripe]][Stripe-url]
+* [![Netlify][Netlify]][Netlify-url]
 * [![DigitalOcean][DigitalOcean]][DigitalOcean-url]
 * [![Nginx][Nginx]][Nginx-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![AntDesign][AntDesign]][AntDesign-url]
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -347,6 +349,12 @@ Project Link: [https://github.com/dontrellthedeveloper/oliviawilson-mern-stack](
 [Next.js]: https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 
+
+[Netlify]: https://img.shields.io/badge/Netlify-111111?style=for-the-badge&logo=netlify&logoColor=00C7B7
+[Netlify-url]: https://www.netlify.com/
+
+
+
 [Node.js]: https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white
 [Node-url]: https://nodejs.org/
 
@@ -365,7 +373,7 @@ Project Link: [https://github.com/dontrellthedeveloper/oliviawilson-mern-stack](
 [DigitalOcean]: https://img.shields.io/badge/DigitalOcean-0080FF?style=for-the-badge&logo=digitalocean&logoColor=white
 [DigitalOcean-url]: https://www.digitalocean.com/
 
-[Stripe]: https://img.shields.io/badge/stripe-ffffff?style=for-the-badge&logo=stripe&logoColor=008CDD
+[Stripe]: https://img.shields.io/badge/stripe-333333?style=for-the-badge&logo=stripe&logoColor=008CDD
 [Stripe-url]: https://stripe.com/
 
 [AntDesign]: https://img.shields.io/badge/AntDesign-0170FE?style=for-the-badge&logo=ant-design&logoColor=white
